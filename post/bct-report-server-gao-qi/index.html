@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>POM Notes</title>
+<title>📣💨✨BCT Report Server搞起😎 | POM Notes</title>
 <meta name="description" content="活到老学到老">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://1078889045.github.io">POM Notes</a></h3>
@@ -76,69 +77,75 @@
   </div>
 </nav>
 
-
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
+          <article class="article">
+            <h1>📣💨✨BCT Report Server搞起😎</h1>
+            <p class="article-meta">
+              2021-02-08
+              
+                <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge warning">
+                  BCT Report Server
+                </a>
+              
+            </p>
+            
+              <img src="http://www.bct-best3.com/Content/Images/%e4%bf%a1%e5%93%b2BCTLogo20201021.png" alt="📣💨✨BCT Report Server搞起😎">
+            
+            <div class="post-content">
+              <h1 id="快速上手"><strong>快速上手</strong></h1>
+<h2 id="环境配置"><strong>环境配置</strong></h2>
+<h3 id="安装">安装</h3>
+<ol>
+<li>安装Telerik Report Designer（<u>Telerik_Reporting_R2_2019_13_1_19_514_DEV.msi</u>）</li>
+</ol>
+<h3 id="运行发布">运行发布</h3>
+<ol>
+<li>下载BCTWebReportServer_KendoUI.7z，解压并用VS打开工程</li>
+<li>打开Controllers\ReportsController.cs，修改HostAppId，避免冲突</li>
+<li>发布到文件系统，使用IIS搭建网站<br>
+<em><strong>Congratulations, the BCT Report Server has been built successfully ~</strong></em></li>
+</ol>
+<h2 id="绘制报表"><strong>绘制报表</strong></h2>
+<p>可参考<a href="https://docs.telerik.com/reporting/designing-reports-understanding-report-structure">DESIGNING REPORTS</a></p>
+<h2 id="发布报表"><strong>发布报表</strong></h2>
+<ol>
+<li>将报表文件拖入文件系统的&quot;Reports&quot;文件夹中<br>
+<img src="https://1078889045.github.io/post-images/1612750147942.jpg" alt="" loading="lazy"></li>
+<li>在Web.config中添加与报表文件一致的数据库连接字符串（数据源界面添加亦可）</li>
+</ol>
+<pre><code class="language-XML">    &lt;connectionStrings&gt;
+        &lt;add name=&quot;???&quot; connectionString=&quot;data source=???;user id=???;password=???;Initial Catalog=???;Integrated Security=false&quot; providerName=&quot;System.Data.SqlClient&quot; /&gt;
+    &lt;/connectionStrings&gt;
+</code></pre>
+<h1 id="访问报表"><strong>访问报表</strong></h1>
+<ol>
+<li>发布地址+“/Report/Main?reportName=”+ 报表名称<br>
+<img src="https://1078889045.github.io/post-images/1612750717677.png" alt="" loading="lazy"></li>
+</ol>
+<h1 id="font-size3-̇-̇font"><font size=3>✧⁺⸜(●˙▾˙●)⸝⁺✧</font></h1>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
           
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://1078889045.github.io/post/bct-vue-gao-qi/">📣💨✨BCT Vue搞起😎</a>
-    </h2>
-    <p class="article-meta">
-      2021-02-07
-      
-        <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge success">
-          BCT Vue
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://1078889045.github.io/post/bct-vue-gao-qi/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://1078889045.github.io/post/bct-report-server-gao-qi/">📣💨✨BCT Report Server搞起😎</a>
-    </h2>
-    <p class="article-meta">
-      2021-02-08
-      
-        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge secondary">
-          BCT Report Server
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://1078889045.github.io/post/bct-report-server-gao-qi/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://1078889045.github.io/post/bct-vue-gao-qi/">
+                <h3 class="post-title">
+                  📣💨✨BCT Vue搞起😎
+                </h3>
+              </a>
+            </div>
+          
         </div>
         
-        <div class="row flex-edges">
-  
-  
-</div>
-
       </div>
-      
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://1078889045.github.io/images/avatar.png?v=1612751774996" class="no-responsive avatar">
@@ -201,7 +208,7 @@
           BCT Report Server
         </a>
       
-        <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge ">
+        <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge secondary">
           BCT Vue
         </a>
       
@@ -212,7 +219,9 @@
   </div>
 </div>
 
+
     </div>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script type="application/javascript">

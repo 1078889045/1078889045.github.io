@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://1078889045.github.io</id>
     <title>POM Notes</title>
-    <updated>2021-02-07T05:11:39.861Z</updated>
+    <updated>2021-02-08T02:36:19.194Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://1078889045.github.io"/>
     <link rel="self" href="https://1078889045.github.io/atom.xml"/>
@@ -10,6 +10,45 @@
     <logo>https://1078889045.github.io/images/avatar.png</logo>
     <icon>https://1078889045.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, POM Notes</rights>
+    <entry>
+        <title type="html"><![CDATA[📣💨✨BCT Report Server搞起😎]]></title>
+        <id>https://1078889045.github.io/post/bct-report-server-gao-qi/</id>
+        <link href="https://1078889045.github.io/post/bct-report-server-gao-qi/">
+        </link>
+        <updated>2021-02-08T01:24:33.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="快速上手"><strong>快速上手</strong></h1>
+<h2 id="环境配置"><strong>环境配置</strong></h2>
+<h3 id="安装">安装</h3>
+<ol>
+<li>安装Telerik Report Designer（<u>Telerik_Reporting_R2_2019_13_1_19_514_DEV.msi</u>）</li>
+</ol>
+<h3 id="运行发布">运行发布</h3>
+<ol>
+<li>下载BCTWebReportServer_KendoUI.7z，解压并用VS打开工程</li>
+<li>打开Controllers\ReportsController.cs，修改HostAppId，避免冲突</li>
+<li>发布到文件系统，使用IIS搭建网站<br>
+<em><strong>Congratulations, the BCT Report Server has been built successfully ~</strong></em></li>
+</ol>
+<h2 id="绘制报表"><strong>绘制报表</strong></h2>
+<p>可参考<a href="https://docs.telerik.com/reporting/designing-reports-understanding-report-structure">DESIGNING REPORTS</a></p>
+<h2 id="发布报表"><strong>发布报表</strong></h2>
+<ol>
+<li>将报表文件拖入文件系统的&quot;Reports&quot;文件夹中<br>
+<img src="https://1078889045.github.io/post-images/1612750147942.jpg" alt="" loading="lazy"></li>
+<li>在Web.config中添加与报表文件一致的数据库连接字符串（数据源界面添加亦可）</li>
+</ol>
+<pre><code class="language-XML">    &lt;connectionStrings&gt;
+        &lt;add name=&quot;???&quot; connectionString=&quot;data source=???;user id=???;password=???;Initial Catalog=???;Integrated Security=false&quot; providerName=&quot;System.Data.SqlClient&quot; /&gt;
+    &lt;/connectionStrings&gt;
+</code></pre>
+<h1 id="访问报表"><strong>访问报表</strong></h1>
+<ol>
+<li>发布地址+“/Report/Main?reportName=”+ 报表名称<br>
+<img src="https://1078889045.github.io/post-images/1612750717677.png" alt="" loading="lazy"></li>
+</ol>
+<h1 id="font-size3-̇-̇font"><font size=3>✧⁺⸜(●˙▾˙●)⸝⁺✧</font></h1>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[📣💨✨BCT Vue搞起😎]]></title>
         <id>https://1078889045.github.io/post/bct-vue-gao-qi/</id>
