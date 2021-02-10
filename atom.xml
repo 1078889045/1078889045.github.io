@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://1078889045.github.io</id>
     <title>POM Notes</title>
-    <updated>2021-02-09T03:04:54.747Z</updated>
+    <updated>2021-02-10T01:03:42.122Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://1078889045.github.io"/>
     <link rel="self" href="https://1078889045.github.io/atom.xml"/>
@@ -10,6 +10,60 @@
     <logo>https://1078889045.github.io/images/avatar.png</logo>
     <icon>https://1078889045.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, POM Notes</rights>
+    <entry>
+        <title type="html"><![CDATA[📣💨✨小技巧备忘录（02）搞起😎]]></title>
+        <id>https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-02-gao-qi/</id>
+        <link href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-02-gao-qi/">
+        </link>
+        <updated>2021-02-10T01:57:19.000Z</updated>
+        <content type="html"><![CDATA[<!-- more -->
+<blockquote>
+<p>How to discern DM barcode with C#?</p>
+</blockquote>
+<ol>
+<li><span  id='1'>使用 <code>ZXing</code>类库和<code>DataMatrix.net</code>类库，对原图进行DM码识别<span></li>
+</ol>
+<pre><code class="language-C#">    // ZXing
+    BarcodeReader reader = new BarcodeReader();
+    Result result = reader.Decode(pImg);
+</code></pre>
+<pre><code class="language-C#">    // DataMatrix.net
+    DmtxImageDecoder dmDecoder = new DmtxImageDecoder();
+    List&lt;string&gt; resultList = dmDecoder.DecodeImage(pImg);
+</code></pre>
+<ol start="2">
+<li>使用<code>OpenCvSharp</code>类库，对图像进行处理
+<blockquote>
+<ul>
+<li>对图像进行灰度处理</li>
+<li>建立图像的梯度幅值</li>
+<li>对图像进行相应的模糊化，消除一些噪点</li>
+<li>对图像进行形态学运算，消除缝隙</li>
+<li>对图像进行腐蚀，然后进行膨胀，消除干扰</li>
+<li>对目标轮廓进行查找，并计算图像面积</li>
+<li>找出几个面积最大的矩形，并输出转换图</li>
+</ul>
+</blockquote>
+</li>
+<li>对转换图进行<a href="#1">1</a>相同操作</li>
+<li>将识别结果去重保存</li>
+</ol>
+<h3 id="绘制流程图-flowchart暂不支持">绘制流程图 Flowchart（暂不支持）</h3>
+<pre><code class="language-flow">st=&gt;start: 开始
+op1=&gt;operation:  原图识别
+op2=&gt;operation:  转换图识别
+op3=&gt;operation:  转换
+cond=&gt;condition: 转换成功 Yes or No?
+e=&gt;end: 输出结果
+
+st(right)-&gt;op1(right)-&gt;op3-&gt;cond(right)
+cond(yes)-&gt;op2-&gt;e
+cond(no)-&gt;e
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://1078889045.github.io/post-images/1612843471233.png" alt="" loading="lazy"></figure>
+<h1 id="font-size3-̇-̇font"><font size=3>✧⁺⸜(●˙▾˙●)⸝⁺✧</font></h1>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[📣💨✨小技巧备忘录（01）搞起😎]]></title>
         <id>https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-01-gao-qi/</id>

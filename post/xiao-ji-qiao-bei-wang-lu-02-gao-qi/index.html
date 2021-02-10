@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Hello Gridea | POM Notes</title>
+<title>📣💨✨小技巧备忘录（02）搞起😎 | POM Notes</title>
 <meta name="description" content="活到老学到老">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,45 +81,81 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>Hello Gridea</h1>
+            <h1>📣💨✨小技巧备忘录（02）搞起😎</h1>
             <p class="article-meta">
-              2021-02-07
+              2021-02-10
               
-                <a href="https://1078889045.github.io/tag/cmfmBss9Q/" class="badge secondary">
-                  Gridea
+                <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge success">
+                  DM barcode
                 </a>
               
             </p>
             
-              <img src="https://1078889045.github.io/post-images/hello-gridea.png" alt="Hello Gridea">
+              <img src="https://1078889045.github.io/post-images/xiao-ji-qiao-bei-wang-lu-02-gao-qi.png" alt="📣💨✨小技巧备忘录（02）搞起😎">
             
             <div class="post-content">
-              <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+              <!-- more -->
+<blockquote>
+<p>How to discern DM barcode with C#?</p>
+</blockquote>
+<ol>
+<li><span  id='1'>使用 <code>ZXing</code>类库和<code>DataMatrix.net</code>类库，对原图进行DM码识别<span></li>
+</ol>
+<pre><code class="language-C#">    // ZXing
+    BarcodeReader reader = new BarcodeReader();
+    Result result = reader.Decode(pImg);
+</code></pre>
+<pre><code class="language-C#">    // DataMatrix.net
+    DmtxImageDecoder dmDecoder = new DmtxImageDecoder();
+    List&lt;string&gt; resultList = dmDecoder.DecodeImage(pImg);
+</code></pre>
+<ol start="2">
+<li>使用<code>OpenCvSharp</code>类库，对图像进行处理
+<blockquote>
+<ul>
+<li>对图像进行灰度处理</li>
+<li>建立图像的梯度幅值</li>
+<li>对图像进行相应的模糊化，消除一些噪点</li>
+<li>对图像进行形态学运算，消除缝隙</li>
+<li>对图像进行腐蚀，然后进行膨胀，消除干扰</li>
+<li>对目标轮廓进行查找，并计算图像面积</li>
+<li>找出几个面积最大的矩形，并输出转换图</li>
+</ul>
+</blockquote>
+</li>
+<li>对转换图进行<a href="#1">1</a>相同操作</li>
+<li>将识别结果去重保存</li>
+</ol>
+<h3 id="绘制流程图-flowchart暂不支持">绘制流程图 Flowchart（暂不支持）</h3>
+<pre><code class="language-flow">st=&gt;start: 开始
+op1=&gt;operation:  原图识别
+op2=&gt;operation:  转换图识别
+op3=&gt;operation:  转换
+cond=&gt;condition: 转换成功 Yes or No?
+e=&gt;end: 输出结果
+
+st(right)-&gt;op1(right)-&gt;op3-&gt;cond(right)
+cond(yes)-&gt;op2-&gt;e
+cond(no)-&gt;e
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://1078889045.github.io/post-images/1612843471233.png" alt="" loading="lazy"></figure>
+<h1 id="font-size3-̇-̇font"><font size=3>✧⁺⸜(●˙▾˙●)⸝⁺✧</font></h1>
 
             </div>
           </article>
         </div>
         <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-01-gao-qi/">
+                <h3 class="post-title">
+                  📣💨✨小技巧备忘录（01）搞起😎
+                </h3>
+              </a>
+            </div>
           
         </div>
         
@@ -199,11 +235,11 @@
           DM barcode
         </a>
       
-        <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge warning">
+        <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge secondary">
           Report Builder 3.0
         </a>
       
-        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge secondary">
+        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge ">
           BCT Report Server
         </a>
       
