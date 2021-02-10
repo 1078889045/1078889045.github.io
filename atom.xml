@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://1078889045.github.io</id>
     <title>POM Notes</title>
-    <updated>2021-02-10T01:03:42.122Z</updated>
+    <updated>2021-02-10T01:47:30.755Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://1078889045.github.io"/>
     <link rel="self" href="https://1078889045.github.io/atom.xml"/>
@@ -18,10 +18,11 @@
         <updated>2021-02-10T01:57:19.000Z</updated>
         <content type="html"><![CDATA[<!-- more -->
 <blockquote>
-<p>How to discern DM barcode with C#?</p>
+<p>How to discern DM barcode with C#?<br>
+<div  id='a' ></div></p>
 </blockquote>
 <ol>
-<li><span  id='1'>使用 <code>ZXing</code>类库和<code>DataMatrix.net</code>类库，对原图进行DM码识别<span></li>
+<li>使用 <code>ZXing</code>类库和<code>DataMatrix.net</code>类库，对原图进行DM码识别</li>
 </ol>
 <pre><code class="language-C#">    // ZXing
     BarcodeReader reader = new BarcodeReader();
@@ -45,7 +46,7 @@
 </ul>
 </blockquote>
 </li>
-<li>对转换图进行<a href="#1">1</a>相同操作</li>
+<li>对转换图进行<a href="#a">1</a>相同操作</li>
 <li>将识别结果去重保存</li>
 </ol>
 <h3 id="绘制流程图-flowchart暂不支持">绘制流程图 Flowchart（暂不支持）</h3>
