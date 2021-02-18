@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>DM barcode | POM Notes</title>
+<title>📣💨✨小技巧备忘录（03）搞起😎 | POM Notes</title>
 <meta name="description" content="活到老学到老">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://1078889045.github.io">POM Notes</a></h3>
@@ -79,40 +80,78 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: DM barcode</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-02-gao-qi/">📣💨✨小技巧备忘录（02）搞起😎</a>
-    </h2>
-    <p class="article-meta">
-      2021-02-10
-      
-        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge secondary">
-          DM barcode
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-02-gao-qi/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>📣💨✨小技巧备忘录（03）搞起😎</h1>
+            <p class="article-meta">
+              2021-02-18
+              
+                <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge secondary">
+                  BarTender
+                </a>
+              
+            </p>
+            
+              <img src="https://1078889045.github.io/post-images/xiao-ji-qiao-bei-wang-lu-03-gao-qi.png" alt="📣💨✨小技巧备忘录（03）搞起😎">
+            
+            <div class="post-content">
+              <!-- more -->
+<blockquote>
+<p>如何使用.NET SDK调用BarTender？</p>
+</blockquote>
+<ol>
+<li>安装BarTender软件（<u>版本2016 R8</u>）</li>
+<li>打开BarTender SDK文件夹，找到提供的<code>Seagull.BarTender.Print</code>类库<br>
+<img src="https://1078889045.github.io/post-images/1612919699253.png" alt="" loading="lazy"></li>
+<li>新建或打开.NET 4.0以上的C#程序，添加引用<code>Seagull.BarTender.Print</code>类库</li>
+<li>使用BarTender Designer画好Label，编写代码调用，例如：</li>
+</ol>
+<pre><code class="language-C#">    // 实例化一个BarTender engine
+    using (var engine = new Engine(true))
+    {
+        // 使用BarTender engine打开.btw文件生成一个LabelFormatDocument对象
+        var format = engine.Documents.Open(labelPath);
+        // 指定打印机
+        format.PrintSetup.PrinterName = printerName;
+        // 打印份数
+        format.PrintSetup.IdenticalCopiesOfLabel = 1; 
+        ...
+        // 为数据源传值
+        foreach (var keyValue in keyValues)
+        {
+            format.SubStrings.SetSubString(keyValue.Key, keyValue.Value);
+        }
+        Messages messages;
+        // 使用LabelFormatDocument对象进行打印，并返回结果
+        Result result = format.Print(printJobName, waitForCompletionTimeout, out messages);
+        // 关闭LabelFormatDocument对象
+        format.Close(SaveOptions.DoNotSaveChanges);
+        // 打印结果处理
+        ...
 
+    }
+</code></pre>
+<h1 id="font-size3-̇-̇font"><font size=3>✧⁺⸜(●˙▾˙●)⸝⁺✧</font></h1>
 
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
-
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-02-gao-qi/">
+                <h3 class="post-title">
+                  📣💨✨小技巧备忘录（02）搞起😎
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://1078889045.github.io/images/avatar.png?v=1613610404628" class="no-responsive avatar">
@@ -189,11 +228,11 @@
     </div>
     <div class="row">
       
-        <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge secondary">
+        <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge success">
           BarTender
         </a>
       
-        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge secondary">
+        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge warning">
           DM barcode
         </a>
       
@@ -201,11 +240,11 @@
           Report Builder 3.0
         </a>
       
-        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge success">
+        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge ">
           BCT Report Server
         </a>
       
-        <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge ">
+        <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge success">
           BCT Vue
         </a>
       
@@ -215,6 +254,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://1078889045.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
 
     </div>
 
