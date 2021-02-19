@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>📣💨✨BCT Report Server搞起😎 | POM Notes</title>
+<title>📣💨✨BCT Report Server搞起😎 续02 | POM Notes</title>
 <meta name="description" content="活到老学到老">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,48 +81,124 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>📣💨✨BCT Report Server搞起😎</h1>
+            <h1>📣💨✨BCT Report Server搞起😎 续02</h1>
             <p class="article-meta">
-              2021-02-08
+              2021-02-19
               
-                <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge ">
+                <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge warning">
                   BCT Report Server
                 </a>
               
             </p>
             
-              <img src="http://www.bct-best3.com/Content/Images/%e4%bf%a1%e5%93%b2BCTLogo20201021.png" alt="📣💨✨BCT Report Server搞起😎">
+              <img src="https://1078889045.github.io/post-images/bct-report-server-gao-qi-xu-02.png" alt="📣💨✨BCT Report Server搞起😎 续02">
             
             <div class="post-content">
-              <h1 id="快速上手"><strong>快速上手</strong></h1>
-<h2 id="环境配置"><strong>环境配置</strong></h2>
-<h3 id="安装">安装</h3>
+              <!-- more -->
+<blockquote>
+<p>如何调用Web服务获取数据？</p>
+</blockquote>
+<h2 id="准备服务"><strong>准备服务</strong></h2>
 <ol>
-<li>安装Telerik Report Designer（<u>Telerik_Reporting_R2_2019_13_1_19_514_DEV.msi</u>）</li>
-</ol>
-<h3 id="运行发布">运行发布</h3>
-<ol>
-<li>下载BCTWebReportServer_KendoUI.7z，解压并用VS打开工程</li>
-<li>打开Controllers\ReportsController.cs，修改HostAppId，避免冲突</li>
-<li>发布到文件系统，使用IIS搭建网站<br>
-<em><strong>Congratulations, the BCT Report Server has been built successfully ~</strong></em></li>
-</ol>
-<h2 id="绘制报表"><strong>绘制报表</strong></h2>
-<p>可参考<a href="https://docs.telerik.com/reporting/designing-reports-understanding-report-structure">DESIGNING REPORTS</a></p>
-<h2 id="发布报表"><strong>发布报表</strong></h2>
-<ol>
-<li>将报表文件拖入文件系统的&quot;Reports&quot;文件夹中<br>
-<img src="https://1078889045.github.io/post-images/1612750147942.jpg" alt="" loading="lazy"></li>
-<li>在Web.config中添加与报表文件一致的数据库连接字符串（数据源界面添加亦可）</li>
-</ol>
-<pre><code class="language-XML">    &lt;connectionStrings&gt;
-        &lt;add name=&quot;???&quot; connectionString=&quot;data source=???;user id=???;password=???;Initial Catalog=???;Integrated Security=false&quot; providerName=&quot;System.Data.SqlClient&quot; /&gt;
-    &lt;/connectionStrings&gt;
+<li>首先用NodeJS（其它语言亦可）编写一个WebAPI测试服务（<font color=red>目前测试看上去不适用jwt认证或OAuth授权，推荐不需要验证的方式</font>）
+<ul>
+<li><code>app.js</code></li>
+</ul>
+<pre><code class="language-JavaScript">
+    const express = require('express') //引入第三方express框架
+    const app = express() //创建web服务
+    const path = require('path') //路径管理模块
+    var utilities = require('./utils/utilities.js');
+    module.exports = app;
+    //设置跨域访问
+    app.all('*', function(req, res, next) {
+        res.header(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);
+        res.header(&quot;Access-Control-Allow-Headers&quot;,
+            &quot;Content-Type, Content-Length, Authorization, Accept, X-Requested-With, ignoreCancelToken&quot;);
+        res.header(&quot;Access-Control-Allow-Methods&quot;, &quot;PUT,POST,GET,DELETE,OPTIONS&quot;);
+        if (req.method == &quot;OPTIONS&quot;) {
+            res.send(200);
+        } else {
+            next();
+        }
+    });
+    app.use(express.static(path.join(__dirname, 'public'))) //静态资源管理
+    const bodyParser = require('body-parser') //处理post接收值的第三模块
+    app.use(bodyParser.urlencoded({
+        extended: false
+    })) //接收post传值中间件
+    app.use(bodyParser.json()) //接收json传真中间件
+    //配置使用cookie的
+    const cookie = require('cookie-parser')
+    app.use(cookie())
+    //引入二级路由
+    const table = require('./routes/table');
+    //创建一级路由
+    app.use('/table', table);
+    var server = app.listen(12347, function() {
+        var host = server.address().address
+        var port = server.address().port
+        console.log(&quot;应用实例，访问地址为 http://%s:%s&quot;, &quot;localhost&quot;, port)
+    });
+
 </code></pre>
-<h1 id="访问报表"><strong>访问报表</strong></h1>
+<ul>
+<li><code>table.js</code></li>
+</ul>
+<pre><code class="language-JavaScript">   
+    var express = require('express');
+    var table = express.Router();
+    var db = require('../utils/db');
+    var utilities = require('../utils/utilities.js');
+    table.get('/getDemoList', function(req, res) {
+        const page = req.query[&quot;page&quot;];
+        const pageSize = req.query[&quot;pageSize&quot;];
+        const field = req.query[&quot;field&quot;];
+        const order = req.query[&quot;order&quot;];
+        var sb = &quot; DECLARE @DataScope nvarchar(64); &quot;;
+        sb += &quot; SET @DataScope = N'温度'; &quot;;
+        sb += &quot; EXECUTE [dbo].[CalculateTrendline] @DataScope; &quot;;
+        db.sql(sb, function(err, result) {
+            if (err) {
+                res.json(utilities.resultError({
+                    message: err
+                }));
+                return;
+            }
+            var arr = result.recordsets[0];
+            if (arr.length &gt; 0 &amp;&amp; order != null) {
+                if (order == &quot;ascend&quot;) {
+                    arr = arr.sort(function(a, b) {
+                        return a[field] &gt; b[field] ? 1 : -1;
+                    });
+                } else if (order == &quot;descend&quot;) {
+                    arr = arr.sort(function(a, b) {
+                        return a[field] &lt; b[field] ? 1 : -1;
+                    });
+                }
+            }
+            if (page != null) {
+                res.json(utilities.resultPageSuccess(page, pageSize, arr));            
+            } else {
+                res.json(utilities.resultSuccess({
+                    items: arr,
+                    total: arr.length
+                }));
+            }
+        });
+    });
+</code></pre>
+</li>
+</ol>
+<h2 id="如何设计"><strong>如何设计</strong></h2>
 <ol>
-<li>发布地址+“/Report/Main?reportName=”+ 报表名称<br>
-<img src="https://1078889045.github.io/post-images/1612750717677.png" alt="" loading="lazy"></li>
+<li>在设计报表时，添加<code>Web Service Data Source</code>，根据接口情况进行配置，然后拉取Table进行展示<br>
+<img src="https://1078889045.github.io/post-images/1613613353260.png" alt="" loading="lazy"></li>
+</ol>
+<h2 id="如何使用"><strong>如何使用</strong></h2>
+<ol>
+<li>为<code>BCTWebReportServer</code>工程新增引用<code>Telerik.Reporting.WebServiceDataSource</code>，然后进行发布</li>
+<li>将设计的报表拖入Reports文件夹即可</li>
 </ol>
 <h1 id="font-size3-̇-̇font"><font size=3>✧⁺⸜(●˙▾˙●)⸝⁺✧</font></h1>
 
@@ -135,9 +211,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://1078889045.github.io/post/bct-vue-gao-qi/">
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-03-gao-qi/">
                 <h3 class="post-title">
-                  📣💨✨BCT Vue搞起😎
+                  📣💨✨小技巧备忘录（03）搞起😎
                 </h3>
               </a>
             </div>
@@ -228,19 +304,19 @@
     </div>
     <div class="row">
       
-        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge ">
+        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge secondary">
           BCT Report Server
         </a>
       
-        <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge warning">
+        <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge ">
           BarTender
         </a>
       
-        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge success">
+        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge secondary">
           DM barcode
         </a>
       
-        <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge secondary">
+        <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge warning">
           Report Builder 3.0
         </a>
       
