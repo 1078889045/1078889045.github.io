@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://1078889045.github.io</id>
     <title>POM Notes</title>
-    <updated>2021-02-19T01:44:48.123Z</updated>
+    <updated>2021-07-05T09:08:25.991Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://1078889045.github.io"/>
     <link rel="self" href="https://1078889045.github.io/atom.xml"/>
@@ -10,6 +10,43 @@
     <logo>https://1078889045.github.io/images/avatar.png</logo>
     <icon>https://1078889045.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, POM Notes</rights>
+    <entry>
+        <title type="html"><![CDATA[📣💨✨小技巧备忘录（04）搞起😎]]></title>
+        <id>https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-04-gao-qi/</id>
+        <link href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-04-gao-qi/">
+        </link>
+        <updated>2021-07-05T08:50:34.000Z</updated>
+        <content type="html"><![CDATA[<!-- more -->
+<blockquote>
+<p>如何在Reporting Services中调用WebService？</p>
+</blockquote>
+<ol>
+<li>创建WebService项目，并重新定义Namespace；<br>
+<img src="https://1078889045.github.io/post-images/1625475179857.png" alt="" loading="lazy"></li>
+<li>发布WebService项目，并且支持SOAP 1.1；</li>
+<li>使用Report Builder 3.0创建报表；</li>
+<li>在报表中添加DataSource，例如：<br>
+<img src="https://1078889045.github.io/post-images/1625475706426.png" alt="" loading="lazy"></li>
+<li>在报表中添加DataSet，例如：<br>
+<img src="https://1078889045.github.io/post-images/1625475739589.png" alt="" loading="lazy"></li>
+</ol>
+<pre><code class="language-Visual">        &lt;Query xmlns=&quot;http://pom.org/&quot;&gt;
+	        &lt;SoapAction&gt;http://pom.org/GetMaterials&lt;/SoapAction&gt;
+        &lt;/Query&gt;
+</code></pre>
+<pre><code class="language-Visual">        &lt;Query&gt;
+            &lt;Method Name=&quot;GetMaterials&quot; Namespace=&quot;http://pom.org&quot;&gt;
+            &lt;Parameters&gt;
+                &lt;Parameter Name=&quot;参数1&quot;&gt;
+                    &lt;DefaultValue&gt;/&lt;/DefaultValue&gt;
+                &lt;/Parameter&gt;
+            &lt;/Parameters&gt;
+            &lt;/Method&gt;
+            &lt;ElementPath IgnoreNamespaces=&quot;true&quot;&gt;*&lt;/ElementPath&gt;
+        &lt;/Query&gt;
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[📣💨✨BCT Report Server搞起😎 续02]]></title>
         <id>https://1078889045.github.io/post/bct-report-server-gao-qi-xu-02/</id>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>📣💨✨小技巧备忘录（02）搞起😎 | POM Notes</title>
+<title>📣💨✨小技巧备忘录（04）搞起😎 | POM Notes</title>
 <meta name="description" content="活到老学到老">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,66 +81,48 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>📣💨✨小技巧备忘录（02）搞起😎</h1>
+            <h1>📣💨✨小技巧备忘录（04）搞起😎</h1>
             <p class="article-meta">
-              2021-02-10
+              2021-07-05
               
-                <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge secondary">
-                  DM barcode
+                <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge success">
+                  Report Builder 3.0
                 </a>
               
             </p>
             
-              <img src="https://1078889045.github.io/post-images/xiao-ji-qiao-bei-wang-lu-02-gao-qi.png" alt="📣💨✨小技巧备忘录（02）搞起😎">
+              <img src="https://1078889045.github.io/post-images/xiao-ji-qiao-bei-wang-lu-04-gao-qi.png" alt="📣💨✨小技巧备忘录（04）搞起😎">
             
             <div class="post-content">
               <!-- more -->
 <blockquote>
-<p>How to discern DM barcode with C#?<br>
-<div  id='a' ></div></p>
+<p>如何在Reporting Services中调用WebService？</p>
 </blockquote>
 <ol>
-<li>使用 <code>ZXing</code>类库和<code>DataMatrix.net</code>类库，对原图进行DM码识别</li>
+<li>创建WebService项目，并重新定义Namespace；<br>
+<img src="https://1078889045.github.io/post-images/1625475179857.png" alt="" loading="lazy"></li>
+<li>发布WebService项目，并且支持SOAP 1.1；</li>
+<li>使用Report Builder 3.0创建报表；</li>
+<li>在报表中添加DataSource，例如：<br>
+<img src="https://1078889045.github.io/post-images/1625475706426.png" alt="" loading="lazy"></li>
+<li>在报表中添加DataSet，例如：<br>
+<img src="https://1078889045.github.io/post-images/1625475739589.png" alt="" loading="lazy"></li>
 </ol>
-<pre><code class="language-C#">    // ZXing
-    BarcodeReader reader = new BarcodeReader();
-    Result result = reader.Decode(pImg);
+<pre><code class="language-Visual">        &lt;Query xmlns=&quot;http://pom.org/&quot;&gt;
+	        &lt;SoapAction&gt;http://pom.org/GetMaterials&lt;/SoapAction&gt;
+        &lt;/Query&gt;
 </code></pre>
-<pre><code class="language-C#">    // DataMatrix.net
-    DmtxImageDecoder dmDecoder = new DmtxImageDecoder();
-    List&lt;string&gt; resultList = dmDecoder.DecodeImage(pImg);
+<pre><code class="language-Visual">        &lt;Query&gt;
+            &lt;Method Name=&quot;GetMaterials&quot; Namespace=&quot;http://pom.org&quot;&gt;
+            &lt;Parameters&gt;
+                &lt;Parameter Name=&quot;参数1&quot;&gt;
+                    &lt;DefaultValue&gt;/&lt;/DefaultValue&gt;
+                &lt;/Parameter&gt;
+            &lt;/Parameters&gt;
+            &lt;/Method&gt;
+            &lt;ElementPath IgnoreNamespaces=&quot;true&quot;&gt;*&lt;/ElementPath&gt;
+        &lt;/Query&gt;
 </code></pre>
-<ol start="2">
-<li>使用<code>OpenCvSharp</code>类库，对图像进行处理
-<blockquote>
-<ul>
-<li>对图像进行灰度处理</li>
-<li>建立图像的梯度幅值</li>
-<li>对图像进行相应的模糊化，消除一些噪点</li>
-<li>对图像进行形态学运算，消除缝隙</li>
-<li>对图像进行腐蚀，然后进行膨胀，消除干扰</li>
-<li>对目标轮廓进行查找，并计算图像面积</li>
-<li>找出几个面积最大的矩形，并输出转换图</li>
-</ul>
-</blockquote>
-</li>
-<li>对转换图进行<a href="#a">1</a>相同操作</li>
-<li>将识别结果去重保存</li>
-</ol>
-<h3 id="绘制流程图-flowchart暂不支持">绘制流程图 Flowchart（暂不支持）</h3>
-<pre><code class="language-flow">st=&gt;start: 开始
-op1=&gt;operation:  原图识别
-op2=&gt;operation:  转换图识别
-op3=&gt;operation:  转换
-cond=&gt;condition: 转换成功 Yes or No?
-e=&gt;end: 输出结果
-
-st(right)-&gt;op1(right)-&gt;op3-&gt;cond(right)
-cond(yes)-&gt;op2-&gt;e
-cond(no)-&gt;e
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://1078889045.github.io/post-images/1612843471233.png" alt="" loading="lazy"></figure>
-<h1 id="font-size3-̇-̇font"><font size=3>✧⁺⸜(●˙▾˙●)⸝⁺✧</font></h1>
 
             </div>
           </article>
@@ -151,9 +133,9 @@ cond(no)-&gt;e
               <div class="next">
                 下一篇
               </div>
-              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-01-gao-qi/">
+              <a href="https://1078889045.github.io/post/bct-report-server-gao-qi-xu-02/">
                 <h3 class="post-title">
-                  📣💨✨小技巧备忘录（01）搞起😎
+                  📣💨✨BCT Report Server搞起😎 续02
                 </h3>
               </a>
             </div>
@@ -250,15 +232,15 @@ cond(no)-&gt;e
     </div>
     <div class="row">
       
-        <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge secondary">
+        <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge ">
           Report Builder 3.0
         </a>
       
-        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge ">
+        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge warning">
           BCT Report Server
         </a>
       
-        <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge success">
+        <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge secondary">
           BarTender
         </a>
       
@@ -266,7 +248,7 @@ cond(no)-&gt;e
           DM barcode
         </a>
       
-        <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge success">
+        <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge secondary">
           BCT Vue
         </a>
       
