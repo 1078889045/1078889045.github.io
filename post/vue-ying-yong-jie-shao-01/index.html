@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>📣💨✨小技巧备忘录（04）搞起😎 | POM Notes</title>
+<title>📣💨✨Vue应用介绍01😎 | POM Notes</title>
 <meta name="description" content="活到老学到老">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,47 +81,151 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>📣💨✨小技巧备忘录（04）搞起😎</h1>
+            <h1>📣💨✨Vue应用介绍01😎</h1>
             <p class="article-meta">
-              2021-07-05
+              2021-07-07
               
-                <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge success">
-                  Report Builder 3.0
+                <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge success">
+                  BCT Vue
                 </a>
               
             </p>
             
-              <img src="https://1078889045.github.io/post-images/xiao-ji-qiao-bei-wang-lu-04-gao-qi.png" alt="📣💨✨小技巧备忘录（04）搞起😎">
+              <img src="https://1078889045.github.io/post-images/vue-ying-yong-jie-shao-01.png" alt="📣💨✨Vue应用介绍01😎">
             
             <div class="post-content">
               <!-- more -->
-<blockquote>
-<p>如何在Reporting Services中调用WebService？</p>
-</blockquote>
+<h1 id="项目结构">项目结构</h1>
+<figure data-type="image" tabindex="1"><img src="https://1078889045.github.io/post-images/1625626436119.png" alt="" loading="lazy"></figure>
+<h2 id="子项含义">子项含义</h2>
 <ol>
-<li>创建WebService项目，并重新定义Namespace；<br>
-<img src="https://1078889045.github.io/post-images/1625475179857.png" alt="" loading="lazy"></li>
-<li>发布WebService项目，并且支持SOAP 1.1；</li>
-<li>使用Report Builder 3.0创建报表；</li>
-<li>在报表中添加DataSource，例如：<br>
-<img src="https://1078889045.github.io/post-images/1625475706426.png" alt="" loading="lazy"></li>
-<li>在报表中添加DataSet，例如：<br>
-<img src="https://1078889045.github.io/post-images/1625475739589.png" alt="" loading="lazy"></li>
+<li>dist 打包输出文件夹</li>
+<li>node_modules 安装的包文件夹</li>
 </ol>
-<pre><code class="language-Visual">        &lt;Query xmlns=&quot;http://pom.org/&quot;&gt;
-	        &lt;SoapAction&gt;http://pom.org/GetMaterials&lt;/SoapAction&gt;
-        &lt;/Query&gt;
+<pre><code class="language-Shell">    yarn add vant@3.0.0或者npm install vant@3.0.0 执行安装vant        
 </code></pre>
-<pre><code class="language-Visual">        &lt;Query&gt;
-            &lt;Method Name=&quot;GetMaterials&quot; Namespace=&quot;http://pom.org&quot;&gt;
-            &lt;Parameters&gt;
-                &lt;Parameter Name=&quot;参数1&quot;&gt;
-                    &lt;DefaultValue&gt;/&lt;/DefaultValue&gt;
-                &lt;/Parameter&gt;
-            &lt;/Parameters&gt;
-            &lt;/Method&gt;
-            &lt;ElementPath IgnoreNamespaces=&quot;true&quot;&gt;*&lt;/ElementPath&gt;
-        &lt;/Query&gt;
+<ol start="2">
+<li>public 公共文件夹</li>
+<li>src 代码文件夹<br>
++ api  接口定义<br>
++ components 公用控件<br>
++ enums 枚举<br>
++ routes 路由定义<br>
++ steup 初始化（暂时无用）<br>
++ utils 工具类 （可在utils/http/axios/index.ts中修改WebAPI地址）<br>
++ views 路由指向控件<br>
+- App.vue 项目入口（当前定义为router-view）<br>
+- main.js 全局定义（例如引入vant的控件）</li>
+<li>其它配置文件<br>
+- vite.config.js （可在其中修改开发时的端口等）</li>
+</ol>
+<h1 id="如何开发">如何开发</h1>
+<h2 id="如何添加路由和跳转页面">如何添加路由和跳转页面</h2>
+<ol>
+<li>在src/routes/routers.js中添加路由<pre><code class="language-JavaScript">     const routes = [
+         {
+             name: 'notFound',
+             path: '/:path(.*)+',
+             redirect: {
+                 name: 'main',
+             },
+         },
+         {
+             name: 'main',
+             path: '/main',
+             component: () =&gt; import('/@/components/Main.vue'),
+             meta: {
+                 title: '主页',
+             },
+         },
+         {
+             name: 'planning',
+             path: '/planning',
+             component: () =&gt; import('/@/views/Planning/index.vue'),
+             meta: {
+                 title: '计划',
+             },
+         },
+         {
+             name: 'xxx',
+             path: '/xxx',
+             component: () =&gt; import('/@/views/Planning/index.vue'),
+             meta: {
+                 title: 'xxx',
+             },
+         },
+     ];
+</code></pre>
+</li>
+<li>在src/components/Main.vue新增按钮（当前使用了控件<u>van-grid-item</u>内置的to方法）</li>
+</ol>
+<pre><code class="language-XML">    &lt;van-grid-item icon=&quot;home-o&quot; text=&quot;新增&quot; to=&quot;新增路由path&quot; /&gt;
+</code></pre>
+<h2 id="如何定义接口及调用接口">如何定义接口及调用接口</h2>
+<ol>
+<li>在api/demo文件夹中添加一个ts文件进行接口定义</li>
+</ol>
+<pre><code class="language-JavaScript">    import { defHttp, otherHttp } from '/@/utils/http/axios';
+    import { DemoParams, DemoListGetResultModel } from './model/tableModel';
+
+    enum Api {
+        DEMO_LIST = '/table/getDemoList',
+    }
+
+    /**
+    * @description: Get sample list value
+    */
+    export function demoListApi(params: DemoParams) {
+        return defHttp.request&lt;DemoListGetResultModel&gt;({
+            url: Api.DEMO_LIST,
+            method: 'GET',
+            params,
+            headers: {
+            ignoreCancelToken: true,
+            },
+        });
+    }
+</code></pre>
+<ol start="2">
+<li>先引入接口定义，然后在页面调用</li>
+</ol>
+<pre><code class="language-JavaScript">    import { demoListApi } from '/@/api/demo/table';
+    import { DemoListItem } from '/@/api/demo/table/model/tableModel';
+    ...
+    const methods = {};
+      methods.search = async function(name) {
+        dataContext.Loading = true;
+        dataContext.selectedRowKeys = [];
+		dataContext.Items = [];
+        let response = [];
+
+        try {
+          if (name &amp;&amp; name != '') {
+            // 调用接口
+            response = await demoListApi({
+				page: 2,
+				pageSize: 5,
+			});
+			// 获取接口返回值，并处理
+			const {
+			  items
+			} = response;
+			
+			dataContext.Items = items;
+			
+          }
+		  
+        } catch (e) {
+
+          //异常处理
+        } finally {
+
+          setTimeout(() =&gt; {
+            dataContext.Loading = false;
+          }, 500);
+        }
+      };
+
 </code></pre>
 
             </div>
@@ -133,9 +237,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://1078889045.github.io/post/bct-report-server-gao-qi-xu-02/">
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-04-gao-qi/">
                 <h3 class="post-title">
-                  📣💨✨BCT Report Server搞起😎 续02
+                  📣💨✨小技巧备忘录（04）搞起😎
                 </h3>
               </a>
             </div>
@@ -238,23 +342,23 @@
     </div>
     <div class="row">
       
-        <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge warning">
+        <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge secondary">
           BCT Vue
         </a>
       
-        <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge success">
+        <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge secondary">
           Report Builder 3.0
         </a>
       
-        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge warning">
+        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge ">
           BCT Report Server
         </a>
       
-        <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge secondary">
+        <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge ">
           BarTender
         </a>
       
-        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge secondary">
+        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge success">
           DM barcode
         </a>
       
