@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>📣💨✨BCT Report Server搞起😎 | POM Notes</title>
+<title>📣💨✨Vant Vue应用介绍01😎 | POM Notes</title>
 <meta name="description" content="活到老学到老">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,49 +81,174 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>📣💨✨BCT Report Server搞起😎</h1>
+            <h1>📣💨✨Vant Vue应用介绍01😎</h1>
             <p class="article-meta">
-              2021-02-08
+              2021-07-07
               
-                <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge warning">
-                  BCT Report Server
+                <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge success">
+                  BCT Vue
                 </a>
               
             </p>
             
-              <img src="http://www.bct-best3.com/Content/Images/%e4%bf%a1%e5%93%b2BCTLogo20201021.png" alt="📣💨✨BCT Report Server搞起😎">
+              <img src="https://1078889045.github.io/post-images/vant-vue-ying-yong-jie-shao-01.png" alt="📣💨✨Vant Vue应用介绍01😎">
             
             <div class="post-content">
-              <h1 id="快速上手"><strong>快速上手</strong></h1>
-<h2 id="环境配置"><strong>环境配置</strong></h2>
-<h3 id="安装">安装</h3>
+              <!-- more -->
+<blockquote>
+<p>* 环境搭建可参考文章 <a href="https://1078889045.github.io/post/bct-vue-gao-qi/">📣💨✨BCT Vue搞起😎</a><br>
+* 项目根文件夹最好不要有中文<br>
+* 可使用HBuilder X或VS Code开发<br>
+* 本Vue应用适应移动端，电脑调试可按F12进入开发者调试切换设备<br>
+* 本Vue应用大部分控件使用了Vant，Table控件使用了Ant Design of Vue</p>
+</blockquote>
+<h1 id="项目结构">项目结构</h1>
+<figure data-type="image" tabindex="1"><img src="https://1078889045.github.io/post-images/1625626436119.png" alt="" loading="lazy"></figure>
+<h2 id="子项含义">子项含义</h2>
 <ol>
-<li>安装Telerik Report Designer（<u>Telerik_Reporting_R2_2019_13_1_19_514_DEV.msi</u>）</li>
+<li>dist 打包输出文件夹</li>
+<li>node_modules 安装的包文件夹</li>
 </ol>
-<h3 id="运行发布">运行发布</h3>
-<ol>
-<li>下载BCTWebReportServer_KendoUI.7z，解压并用VS打开工程</li>
-<li>打开Controllers\ReportsController.cs，修改HostAppId，避免冲突</li>
-<li>发布到文件系统，使用IIS搭建网站<br>
-<em><strong>Congratulations, the BCT Report Server has been built successfully ~</strong></em></li>
-</ol>
-<h2 id="绘制报表"><strong>绘制报表</strong></h2>
-<p>可参考<a href="https://docs.telerik.com/reporting/designing-reports-understanding-report-structure">DESIGNING REPORTS</a></p>
-<h2 id="发布报表"><strong>发布报表</strong></h2>
-<ol>
-<li>将报表文件拖入文件系统的&quot;Reports&quot;文件夹中<br>
-<img src="https://1078889045.github.io/post-images/1612750147942.jpg" alt="" loading="lazy"></li>
-<li>在Web.config中添加与报表文件一致的数据库连接字符串（数据源界面添加亦可）</li>
-</ol>
-<pre><code class="language-XML">    &lt;connectionStrings&gt;
-        &lt;add name=&quot;???&quot; connectionString=&quot;data source=???;user id=???;password=???;Initial Catalog=???;Integrated Security=false&quot; providerName=&quot;System.Data.SqlClient&quot; /&gt;
-    &lt;/connectionStrings&gt;
+<pre><code class="language-Shell">    yarn add vant@3.0.0或者npm install vant@3.0.0 执行安装vant        
 </code></pre>
-<h1 id="访问报表"><strong>访问报表</strong></h1>
-<ol>
-<li>发布地址+“/Report/Main?reportName=”+ 报表名称<br>
-<img src="https://1078889045.github.io/post-images/1612750717677.png" alt="" loading="lazy"></li>
+<ol start="2">
+<li>public 公共文件夹</li>
+<li>src 代码文件夹<br>
++ api  接口定义<br>
++ components 公用控件<br>
++ enums 枚举<br>
++ routes 路由定义<br>
++ steup 初始化（暂时无用）<br>
++ utils 工具类 （可在utils/http/axios/index.ts中修改WebAPI地址）<br>
++ views 路由指向控件<br>
+- App.vue 项目入口（当前定义为router-view）<br>
+- main.js 全局定义（例如引入vant的控件）</li>
+<li>其它配置文件<br>
+- vite.config.js （可在其中修改开发时的端口等）</li>
 </ol>
+<h1 id="如何开发">如何开发</h1>
+<h2 id="如何添加路由和跳转页面">如何添加路由和跳转页面</h2>
+<ol>
+<li>在src/routes/routers.js中添加路由<pre><code class="language-JavaScript">     const routes = [
+         {
+             name: 'notFound',
+             path: '/:path(.*)+',
+             redirect: {
+                 name: 'main',
+             },
+         },
+         {
+             name: 'main',
+             path: '/main',
+             component: () =&gt; import('/@/components/Main.vue'),
+             meta: {
+                 title: '主页',
+             },
+         },
+         {
+             name: 'planning',
+             path: '/planning',
+             component: () =&gt; import('/@/views/Planning/index.vue'),
+             meta: {
+                 title: '计划',
+             },
+         },
+         {
+             name: 'xxx',
+             path: '/xxx',
+             component: () =&gt; import('/@/views/Planning/index.vue'),
+             meta: {
+                 title: 'xxx',
+             },
+         },
+     ];
+</code></pre>
+</li>
+<li>在src/components/Main.vue新增按钮（当前使用了控件<u>van-grid-item</u>内置的to方法）</li>
+</ol>
+<pre><code class="language-XML">    &lt;van-grid-item icon=&quot;home-o&quot; text=&quot;新增&quot; to=&quot;新增路由path&quot; /&gt;
+</code></pre>
+<h2 id="如何定义接口及调用接口">如何定义接口及调用接口</h2>
+<ol>
+<li>在api/demo文件夹中添加一个ts文件进行接口定义</li>
+</ol>
+<pre><code class="language-JavaScript">    import { defHttp, otherHttp } from '/@/utils/http/axios';
+    import { DemoParams, DemoListGetResultModel } from './model/tableModel';
+
+    enum Api {
+        DEMO_LIST = '/table/getDemoList',
+    }
+
+    /**
+    * @description: Get sample list value
+    */
+    export function demoListApi(params: DemoParams) {
+        return defHttp.request&lt;DemoListGetResultModel&gt;({
+            url: Api.DEMO_LIST,
+            method: 'GET',
+            params,
+            headers: {
+            ignoreCancelToken: true,
+            },
+        });
+    }
+</code></pre>
+<ol start="2">
+<li>先引入接口定义，然后在页面调用</li>
+</ol>
+<pre><code class="language-JavaScript">    import { demoListApi } from '/@/api/demo/table';
+    import { DemoListItem } from '/@/api/demo/table/model/tableModel';
+    ...
+    const methods = {};
+      methods.search = async function(name) {
+        dataContext.Loading = true;
+        dataContext.selectedRowKeys = [];
+		dataContext.Items = [];
+        let response = [];
+
+        try {
+          if (name &amp;&amp; name != '') {
+            // 调用接口
+            response = await demoListApi({
+				page: 2,
+				pageSize: 5,
+			});
+			// 获取接口返回值，并处理
+			const {
+			  items
+			} = response;
+			
+			dataContext.Items = items;
+			
+          }
+		  
+        } catch (e) {
+
+          //异常处理
+        } finally {
+
+          setTimeout(() =&gt; {
+            dataContext.Loading = false;
+          }, 500);
+        }
+      };
+
+</code></pre>
+<h2 id="常用命令">常用命令</h2>
+<ol>
+<li>本地运行</li>
+</ol>
+<pre><code class="language-Shell">    yarn dev
+</code></pre>
+<p><img src="https://1078889045.github.io/post-images/1625629612583.png" alt="" loading="lazy"><br>
+2. 打包发布，将生成的dist文件夹在IIS中发布即可</p>
+<pre><code class="language-Shell">    yarn build
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://1078889045.github.io/post-images/1625629688700.png" alt="" loading="lazy"></figure>
+<h1 id="参考文档">参考文档</h1>
+<p><a href="https://vant-contrib.gitee.io/vant/#/zh-CN/home">Vant 2.12.22组件文档</a><br>
+<a href="https://2x.antdv.com/components/overview-cn/">Ant Design of Vue 2.0.0组件文档</a><br>
+<a href="https://www.vue3js.cn/docs/zh/">Vue3中文文档</a></p>
 <h1 id="font-size3-̇-̇font"><font size=3>✧⁺⸜(●˙▾˙●)⸝⁺✧</font></h1>
 
             </div>
@@ -135,9 +260,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://1078889045.github.io/post/bct-vue-gao-qi/">
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-04-gao-qi/">
                 <h3 class="post-title">
-                  📣💨✨BCT Vue搞起😎
+                  📣💨✨小技巧备忘录（04）搞起😎
                 </h3>
               </a>
             </div>
@@ -244,11 +369,11 @@
           BCT Vue
         </a>
       
-        <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge ">
+        <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge success">
           Report Builder 3.0
         </a>
       
-        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge warning">
+        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge secondary">
           BCT Report Server
         </a>
       
@@ -256,7 +381,7 @@
           BarTender
         </a>
       
-        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge secondary">
+        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge ">
           DM barcode
         </a>
       

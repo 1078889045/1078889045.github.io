@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://1078889045.github.io</id>
     <title>POM Notes</title>
-    <updated>2021-07-09T00:58:19.708Z</updated>
+    <updated>2021-07-09T01:01:32.392Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://1078889045.github.io"/>
     <link rel="self" href="https://1078889045.github.io/atom.xml"/>
@@ -10,6 +10,170 @@
     <logo>https://1078889045.github.io/images/avatar.png</logo>
     <icon>https://1078889045.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, POM Notes</rights>
+    <entry>
+        <title type="html"><![CDATA[📣💨✨Vant Vue应用介绍01😎]]></title>
+        <id>https://1078889045.github.io/post/vant-vue-ying-yong-jie-shao-01/</id>
+        <link href="https://1078889045.github.io/post/vant-vue-ying-yong-jie-shao-01/">
+        </link>
+        <updated>2021-07-07T02:45:26.000Z</updated>
+        <content type="html"><![CDATA[<!-- more -->
+<blockquote>
+<p>* 环境搭建可参考文章 <a href="https://1078889045.github.io/post/bct-vue-gao-qi/">📣💨✨BCT Vue搞起😎</a><br>
+* 项目根文件夹最好不要有中文<br>
+* 可使用HBuilder X或VS Code开发<br>
+* 本Vue应用适应移动端，电脑调试可按F12进入开发者调试切换设备<br>
+* 本Vue应用大部分控件使用了Vant，Table控件使用了Ant Design of Vue</p>
+</blockquote>
+<h1 id="项目结构">项目结构</h1>
+<figure data-type="image" tabindex="1"><img src="https://1078889045.github.io/post-images/1625626436119.png" alt="" loading="lazy"></figure>
+<h2 id="子项含义">子项含义</h2>
+<ol>
+<li>dist 打包输出文件夹</li>
+<li>node_modules 安装的包文件夹</li>
+</ol>
+<pre><code class="language-Shell">    yarn add vant@3.0.0或者npm install vant@3.0.0 执行安装vant        
+</code></pre>
+<ol start="2">
+<li>public 公共文件夹</li>
+<li>src 代码文件夹<br>
++ api  接口定义<br>
++ components 公用控件<br>
++ enums 枚举<br>
++ routes 路由定义<br>
++ steup 初始化（暂时无用）<br>
++ utils 工具类 （可在utils/http/axios/index.ts中修改WebAPI地址）<br>
++ views 路由指向控件<br>
+- App.vue 项目入口（当前定义为router-view）<br>
+- main.js 全局定义（例如引入vant的控件）</li>
+<li>其它配置文件<br>
+- vite.config.js （可在其中修改开发时的端口等）</li>
+</ol>
+<h1 id="如何开发">如何开发</h1>
+<h2 id="如何添加路由和跳转页面">如何添加路由和跳转页面</h2>
+<ol>
+<li>在src/routes/routers.js中添加路由<pre><code class="language-JavaScript">     const routes = [
+         {
+             name: 'notFound',
+             path: '/:path(.*)+',
+             redirect: {
+                 name: 'main',
+             },
+         },
+         {
+             name: 'main',
+             path: '/main',
+             component: () =&gt; import('/@/components/Main.vue'),
+             meta: {
+                 title: '主页',
+             },
+         },
+         {
+             name: 'planning',
+             path: '/planning',
+             component: () =&gt; import('/@/views/Planning/index.vue'),
+             meta: {
+                 title: '计划',
+             },
+         },
+         {
+             name: 'xxx',
+             path: '/xxx',
+             component: () =&gt; import('/@/views/Planning/index.vue'),
+             meta: {
+                 title: 'xxx',
+             },
+         },
+     ];
+</code></pre>
+</li>
+<li>在src/components/Main.vue新增按钮（当前使用了控件<u>van-grid-item</u>内置的to方法）</li>
+</ol>
+<pre><code class="language-XML">    &lt;van-grid-item icon=&quot;home-o&quot; text=&quot;新增&quot; to=&quot;新增路由path&quot; /&gt;
+</code></pre>
+<h2 id="如何定义接口及调用接口">如何定义接口及调用接口</h2>
+<ol>
+<li>在api/demo文件夹中添加一个ts文件进行接口定义</li>
+</ol>
+<pre><code class="language-JavaScript">    import { defHttp, otherHttp } from '/@/utils/http/axios';
+    import { DemoParams, DemoListGetResultModel } from './model/tableModel';
+
+    enum Api {
+        DEMO_LIST = '/table/getDemoList',
+    }
+
+    /**
+    * @description: Get sample list value
+    */
+    export function demoListApi(params: DemoParams) {
+        return defHttp.request&lt;DemoListGetResultModel&gt;({
+            url: Api.DEMO_LIST,
+            method: 'GET',
+            params,
+            headers: {
+            ignoreCancelToken: true,
+            },
+        });
+    }
+</code></pre>
+<ol start="2">
+<li>先引入接口定义，然后在页面调用</li>
+</ol>
+<pre><code class="language-JavaScript">    import { demoListApi } from '/@/api/demo/table';
+    import { DemoListItem } from '/@/api/demo/table/model/tableModel';
+    ...
+    const methods = {};
+      methods.search = async function(name) {
+        dataContext.Loading = true;
+        dataContext.selectedRowKeys = [];
+		dataContext.Items = [];
+        let response = [];
+
+        try {
+          if (name &amp;&amp; name != '') {
+            // 调用接口
+            response = await demoListApi({
+				page: 2,
+				pageSize: 5,
+			});
+			// 获取接口返回值，并处理
+			const {
+			  items
+			} = response;
+			
+			dataContext.Items = items;
+			
+          }
+		  
+        } catch (e) {
+
+          //异常处理
+        } finally {
+
+          setTimeout(() =&gt; {
+            dataContext.Loading = false;
+          }, 500);
+        }
+      };
+
+</code></pre>
+<h2 id="常用命令">常用命令</h2>
+<ol>
+<li>本地运行</li>
+</ol>
+<pre><code class="language-Shell">    yarn dev
+</code></pre>
+<p><img src="https://1078889045.github.io/post-images/1625629612583.png" alt="" loading="lazy"><br>
+2. 打包发布，将生成的dist文件夹在IIS中发布即可</p>
+<pre><code class="language-Shell">    yarn build
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://1078889045.github.io/post-images/1625629688700.png" alt="" loading="lazy"></figure>
+<h1 id="参考文档">参考文档</h1>
+<p><a href="https://vant-contrib.gitee.io/vant/#/zh-CN/home">Vant 2.12.22组件文档</a><br>
+<a href="https://2x.antdv.com/components/overview-cn/">Ant Design of Vue 2.0.0组件文档</a><br>
+<a href="https://www.vue3js.cn/docs/zh/">Vue3中文文档</a></p>
+<h1 id="font-size3-̇-̇font"><font size=3>✧⁺⸜(●˙▾˙●)⸝⁺✧</font></h1>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[📣💨✨小技巧备忘录（04）搞起😎]]></title>
         <id>https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-04-gao-qi/</id>
