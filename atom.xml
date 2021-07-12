@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://1078889045.github.io</id>
     <title>POM Notes</title>
-    <updated>2021-07-09T01:32:36.360Z</updated>
+    <updated>2021-07-12T07:56:48.126Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://1078889045.github.io"/>
     <link rel="self" href="https://1078889045.github.io/atom.xml"/>
@@ -25,7 +25,7 @@
 * 本Vue应用大部分控件使用了Vant，Table控件使用了Ant Design of Vue</p>
 </blockquote>
 <h1 id="项目结构">项目结构</h1>
-<figure data-type="image" tabindex="1"><img src="https://1078889045.github.io/post-images/1625626436119.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://1078889045.github.io/post-images/1626076107725.png" alt="" loading="lazy"></figure>
 <h2 id="子项含义">子项含义</h2>
 <ol>
 <li>dist 打包输出文件夹</li>
@@ -41,12 +41,15 @@
 + enums 枚举<br>
 + routes 路由定义<br>
 + steup 初始化（暂时无用）<br>
-+ utils 工具类 （可在utils/http/axios/index.ts中修改WebAPI地址）<br>
++ utils 工具类<br>
 + views 路由指向控件<br>
 - App.vue 项目入口（当前定义为router-view）<br>
-- main.js 全局定义（例如引入vant的控件）</li>
+- main.js 全局定义（例如引入vant的控件、样式等）</li>
 <li>其它配置文件<br>
-- vite.config.js （可在其中修改开发时的端口等）</li>
+- .env （全局环境变量定义）<br>
+- .env.development （开发环境变量定义）<br>
+- .env.production （生产环境变量定义）<br>
+- vite.config.js （可在其中修改开发端口、字符解析、打包输出文件夹和打包块定义等）</li>
 </ol>
 <h1 id="如何开发">如何开发</h1>
 <h2 id="如何添加路由和跳转页面">如何添加路由和跳转页面</h2>
@@ -162,11 +165,11 @@
 </ol>
 <pre><code class="language-Shell">    yarn dev
 </code></pre>
-<p><img src="https://1078889045.github.io/post-images/1625629612583.png" alt="" loading="lazy"><br>
+<p><img src="https://1078889045.github.io/post-images/1626076521038.png" alt="" loading="lazy"><br>
 2. 打包发布，将生成的dist文件夹在IIS中发布即可</p>
 <pre><code class="language-Shell">    yarn build
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://1078889045.github.io/post-images/1625629688700.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://1078889045.github.io/post-images/1626076562917.png" alt="" loading="lazy"></figure>
 <h1 id="参考文档">参考文档</h1>
 <p><a href="https://vant-contrib.gitee.io/vant/#/zh-CN/home">Vant 2.12.22组件文档</a><br>
 <a href="https://2x.antdv.com/components/overview-cn/">Ant Design of Vue 2.0.0组件文档</a><br>
