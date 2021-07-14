@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://1078889045.github.io</id>
     <title>POM Notes</title>
-    <updated>2021-07-12T07:58:03.807Z</updated>
+    <updated>2021-07-14T09:33:57.462Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://1078889045.github.io"/>
     <link rel="self" href="https://1078889045.github.io/atom.xml"/>
@@ -52,6 +52,31 @@
 - vite.config.js （可在其中修改开发端口、字符解析、打包输出文件夹和打包块定义等）</li>
 </ol>
 <h1 id="如何开发">如何开发</h1>
+<h2 id="环境变量">环境变量</h2>
+<ol>
+<li>.env</li>
+</ol>
+<pre><code class="language-Python">    # APP标题
+    VITE_APP_TITLE = BCT Vite应用
+    # 启动端口号
+    VITE_APP_PORT = 8080
+    # 根路径
+    VITE_APP_BASE_URL = '/'
+    # 打包输出文件夹
+    VITE_APP_OUTPUT_DIR = 'dist'
+</code></pre>
+<ol start="2">
+<li>.env.development</li>
+</ol>
+<pre><code class="language-Python">    # 接口地址
+    VITE_APP_BASE_API = '开发环境接口地址'
+</code></pre>
+<ol start="3">
+<li>.env.production</li>
+</ol>
+<pre><code class="language-Python">    # 接口地址
+    VITE_APP_BASE_API = '生产环境接口地址'
+</code></pre>
 <h2 id="如何添加路由和跳转页面">如何添加路由和跳转页面</h2>
 <ol>
 <li>在src/routes/routers.js中添加路由<pre><code class="language-JavaScript">     const routes = [

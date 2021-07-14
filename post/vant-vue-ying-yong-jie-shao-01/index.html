@@ -7,7 +7,7 @@
 <meta name="description" content="活到老学到老">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://1078889045.github.io/favicon.ico?v=1626076601992">
+<link rel="shortcut icon" href="https://1078889045.github.io/favicon.ico?v=1626255224348">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -85,7 +85,7 @@
             <p class="article-meta">
               2021-07-09
               
-                <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge success">
+                <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge warning">
                   BCT Vue
                 </a>
               
@@ -130,6 +130,31 @@
 - vite.config.js （可在其中修改开发端口、字符解析、打包输出文件夹和打包块定义等）</li>
 </ol>
 <h1 id="如何开发">如何开发</h1>
+<h2 id="环境变量">环境变量</h2>
+<ol>
+<li>.env</li>
+</ol>
+<pre><code class="language-Python">    # APP标题
+    VITE_APP_TITLE = BCT Vite应用
+    # 启动端口号
+    VITE_APP_PORT = 8080
+    # 根路径
+    VITE_APP_BASE_URL = '/'
+    # 打包输出文件夹
+    VITE_APP_OUTPUT_DIR = 'dist'
+</code></pre>
+<ol start="2">
+<li>.env.development</li>
+</ol>
+<pre><code class="language-Python">    # 接口地址
+    VITE_APP_BASE_API = '开发环境接口地址'
+</code></pre>
+<ol start="3">
+<li>.env.production</li>
+</ol>
+<pre><code class="language-Python">    # 接口地址
+    VITE_APP_BASE_API = '生产环境接口地址'
+</code></pre>
 <h2 id="如何添加路由和跳转页面">如何添加路由和跳转页面</h2>
 <ol>
 <li>在src/routes/routers.js中添加路由<pre><code class="language-JavaScript">     const routes = [
@@ -276,7 +301,7 @@
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://1078889045.github.io/images/avatar.png?v=1626076601992" class="no-responsive avatar">
+    <img src="https://1078889045.github.io/images/avatar.png?v=1626255224348" class="no-responsive avatar">
     <div class="text-muted">活到老学到老</div>
     <div class="social-container">
       
@@ -376,15 +401,15 @@
           Report Builder 3.0
         </a>
       
-        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge ">
+        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge warning">
           BCT Report Server
         </a>
       
-        <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge warning">
+        <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge ">
           BarTender
         </a>
       
-        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge secondary">
+        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge warning">
           DM barcode
         </a>
       
