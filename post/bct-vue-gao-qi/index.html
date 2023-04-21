@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>📣💨✨BCT Vue搞起😎 | POM Notes</title>
+<meta name="description" content="活到老学到老">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://1078889045.github.io/favicon.ico?v=1682056388699">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://1078889045.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/highlight.min.js"></script>
+<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://1078889045.github.io">POM Notes</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>📣💨✨BCT Vue搞起😎</h1>
+            <p class="article-meta">
+              2021-02-07
+              
+                <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge success">
+                  BCT Vue
+                </a>
+              
+            </p>
+            
+              <img src="https://1078889045.github.io/post-images/bct-vue-gao-qi.png" alt="📣💨✨BCT Vue搞起😎">
+            
+            <div class="post-content">
+              <h1 id="快速上手"><strong>快速上手</strong></h1>
+<h2 id="环境配置"><strong>环境配置</strong></h2>
+<h3 id="工具配置">工具配置</h3>
+<h4 id="hbuilder-x">HBuilder X</h4>
+<ol>
+<li>若出现写代码卡顿情况，可在设置中关闭“代码助手”</li>
+</ol>
+<h4 id="vscode">vscode</h4>
+<p>可参考<a href="https://doc.vvbin.cn/">Vue Vben Admin 2.0项目文档</a></p>
+<h3 id="安装">安装</h3>
+<ol>
+<li>安装 <a href="https://nodejs.org/en/">Node.js</a>，<u>Better be v12.18.4</u></li>
+</ol>
+<pre><code class="language-Shell">   # 出现相应npm版本即可
+   npm -v
+
+   # 出现相应node版本即可
+   node -v
+</code></pre>
+<h3 id="安装依赖">安装依赖</h3>
+<ol>
+<li>安装 yarn</li>
+</ol>
+<pre><code class="language-Shell">   # 全局安装yarn
+   npm i -g yarn
+
+   # 验证
+   yarn -v # 出现对应版本号即代表安装成功
+</code></pre>
+<ol start="2">
+<li>依赖安装</li>
+</ol>
+<pre><code class="language-Shell">    # 安装依赖
+    yarn install
+</code></pre>
+<h4 id="font-size2echarts需安装v490font"><font size=2><em><strong>ECharts需安装v4.9.0</strong></em></font></h4>
+<pre><code class="language-Shell">    yarn add echarts@4.9.0
+</code></pre>
+<h3 id="npm-script">npm Script</h3>
+<p>安装依赖</p>
+<pre><code class="language-Shell">    yarn bootstrap
+</code></pre>
+<p>运行项目</p>
+<pre><code class="language-Shell">    yarn serve
+</code></pre>
+<p>打包项目</p>
+<pre><code class="language-Shell">    yarn build
+</code></pre>
+<p>清空缓存后构建</p>
+<pre><code class="language-Shell">    yarn build:no-cache
+</code></pre>
+<h2 id="项目配置项"><strong>项目配置项</strong></h2>
+<h3 id="环境变量配置">环境变量配置</h3>
+<p>项目的环境变量配置位于 项目根目录 .env 、.env.development、.env.production<br>
+可参考<a href="https://doc.vvbin.cn/guide/settings.html">Vue Vben Admin 2.0项目文档</a>，当前项目未使用最新版本，与文档略有不同</p>
+<h3 id="配置文件路径">配置文件路径</h3>
+<p>src/settings/projectSetting.ts</p>
+<h4 id="说明">说明</h4>
+<pre><code class="language-JavaScript">    // ! 改动后需要清空浏览器缓存
+    const setting: ProjectConfig = {
+    // 是否显示SettingButton
+    showSettingButton: true,
+    // 权限模式,默认前端角色权限模式
+    permissionMode: PermissionModeEnum.ROLE,
+    // 权限缓存存放位置。默认存放于localStorage
+    permissionCacheType: CacheTypeEnum.LOCAL,
+    // 网站灰色模式，用于可能悼念的日期开启
+    grayMode: false,
+    // 色弱模式
+    colorWeak: false,
+    // 是否取消菜单,顶部,多标签页显示, 用于可能内嵌在别的系统内
+    fullContent: false,
+    // 主题内容宽度
+    contentMode: ContentEnum.FULL,
+    // 是否显示logo
+    showLogo: true,
+    // 是否显示底部信息 copyright
+    showFooter: true,
+
+    // 多语言配置
+    locale: {
+        // 是否显示,这里显示只的是是否显示切换语言的按钮
+        show: true,
+        // 当前语言
+        lang: 'zh_CN',
+        // 默认语言
+        fallback: 'zh_CN',
+        //允许的语言
+        availableLocales: ['zh_CN', 'en'],
+    },
+    // 头部配置
+    headerSetting: {
+        // 背景色
+        bgColor: '#ffffff',
+        // 固定头部
+        fixed: true,
+        // 是否显示顶部
+        show: true,
+        // 主题
+        theme: MenuThemeEnum.LIGHT,
+        // 开启锁屏功能
+        useLockPage: true,
+        // 显示刷新按钮
+        showRedo: true,
+        // 显示全屏按钮
+        showFullScreen: true,
+        // 显示文档按钮
+        showDoc: true,
+        // 显示消息中心按钮
+        showNotice: true,
+        // 显示菜单搜索按钮
+        showSearch: true,
+    },
+    // 菜单配置
+    menuSetting: {
+        // 背景色
+        bgColor: '#273352',
+        // 是否固定住菜单
+        fixed: true,
+        // 菜单折叠
+        collapsed: false,
+        // 折叠菜单时候是否显示菜单名
+        collapsedShowTitle: false,
+        // 是否可拖拽
+        canDrag: true,
+        // 是否显示
+        show: true,
+        // 菜单宽度
+        menuWidth: 180,
+        // 菜单模式
+        mode: MenuModeEnum.INLINE,
+        // 菜单类型
+        type: MenuTypeEnum.SIDEBAR,
+        // 菜单主题
+        theme: MenuThemeEnum.DARK,
+        // 分割菜单
+        split: false,
+        // 顶部菜单布局
+        topMenuAlign: 'start',
+        // 折叠触发器的位置
+        trigger: TriggerEnum.HEADER,
+        // 手风琴模式，只展示一个菜单
+        accordion: true,
+        // 在路由切换的时候关闭左侧混合菜单展开菜单
+        closeMixSidebarOnChange: false,
+        // 左侧混合菜单模块切换触发方式
+        mixSideTrigger: MixSidebarTriggerEnum.CLICK,
+        // 是否固定左侧混合菜单
+        mixSideFixed: false,
+    },
+    // 多标签
+    multiTabsSetting: {
+        // 开启
+        show: true,
+        // 开启快速操作
+        showQuick: true,
+        // 是否可以拖拽
+        canDrag: true,
+
+        // 是否显示刷新那妞
+        showRedo: true,
+        // 是否显示折叠按钮
+        showFold: true,
+    },
+
+    // 动画配置
+    transitionSetting: {
+        //  是否开启切换动画
+        enable: true,
+
+        // 动画名
+        basicTransition: RouterTransitionEnum.FADE_SIDE,
+
+        // 是否打开页面切换loading
+        openPageLoading: true,
+
+        //是否打开页面切换顶部进度条
+        openNProgress: false,
+    },
+
+    // 是否开启KeepAlive缓存  开发时候最好关闭,不然每次都需要清除缓存
+    openKeepAlive: true,
+
+    // 自动锁屏时间，为0不锁屏。 单位分钟 默认1个小时
+    lockTime: 0,
+    // 显示面包屑
+    showBreadCrumb: true,
+    // 显示面包屑图标
+    showBreadCrumbIcon: false,
+    //  开启页面切换动画
+    openRouterTransition: true,
+
+    // 路由切换动画
+    routerTransition: RouterTransitionEnum.ZOOM_FADE,
+
+    // 是否开启回到顶部
+    useOpenBackTop: true,
+
+    //  是否可以嵌入iframe页面
+    canEmbedIFramePage: true,
+
+    // 切换界面的时候是否删除未关闭的message及notify
+    closeMessageOnSwitch: true,
+
+    // 切换界面的时候是否取消已经发送但是未响应的http请求。
+    // 如果开启,想对单独接口覆盖。可以在单独接口设置
+    removeAllHttpPending: true,
+    };
+</code></pre>
+<h1 id="路由"><strong>路由</strong></h1>
+<p>可参考<a href="https://doc.vvbin.cn/guide/router.html">Vue Vben Admin 2.0项目文档</a></p>
+<h1 id="菜单"><strong>菜单</strong></h1>
+<p>可参考<a href="https://doc.vvbin.cn/guide/menu.html">Vue Vben Admin 2.0项目文档</a></p>
+<h1 id="客制化权限"><strong>客制化权限</strong></h1>
+<h2 id="权限验证自定义指令">权限验证自定义指令</h2>
+<p>src/setup/directives/myPermission.ts</p>
+<h2 id="路由权限">路由权限</h2>
+<ol>
+<li>在Router的meta中增加functionality</li>
+</ol>
+<pre><code class="language-TypeScript">    [
+        ...
+        meta: {
+            icon: 'gg:desktop',
+            title: t('routes.systemSetting.systemSetting'),
+            functionality: 'EBS.SystemSetting.Show'
+        }
+    ]
+</code></pre>
+<h2 id="页面组件权限">页面组件权限</h2>
+<ol>
+<li>组件增加v-myPermission属性</li>
+</ol>
+<pre><code class="language-JavaScript">    &lt;a-button v-myPermission=&quot;'EBS.EmployeeManagement.Employee.Modify'&quot; &gt;&lt;/a-button&gt;
+</code></pre>
+<h1 id="国际化">国际化</h1>
+<p>src/locales/lang/</p>
+<pre><code class="language-TypeScript">    // 引入useI18n
+    import { useI18n } from '/@/hooks/web/useI18n';
+    // 实例化useI18n
+    const { t } = useI18n();
+    // 不带参数
+    const nameLabel = t('entity.employee.Name');
+    // 带参数
+    const searchPlaceholder = t('component.input.SearchPlaceholder', {
+        name: nameLabel
+    });
+</code></pre>
+<h1 id="图标">图标</h1>
+<p><a href="https://iconify.design/icon-sets/mdi/">Material Design Icons</a><br>
+<a href="https://iconify.design/icon-sets/gg/">css.gg</a></p>
+<h1 id="参考文档">参考文档</h1>
+<p><a href="https://doc.vvbin.cn/">Vue Vben Admin 2.0项目文档</a><br>
+<a href="https://2x.antdv.com/components/overview-cn/">Ant Design of Vue 2.0.0组件文档</a><br>
+<a href="https://cn.vuejs.org/">Vue3中文文档</a></p>
+<h1 id="font-size3-̇-̇font"><font size=3>✧⁺⸜(●˙▾˙●)⸝⁺✧</font></h1>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
+
+          
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://1078889045.github.io/images/avatar.png?v=1682056388699" class="no-responsive avatar">
+    <div class="text-muted">活到老学到老</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-09-gao-qi/">📣💨✨小技巧备忘录（09）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-08-gao-qi/">📣💨✨小技巧备忘录（08）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-07-gao-qi/">📣💨✨小技巧备忘录（07）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-06-gao-qi/">📣💨✨小技巧备忘录（06）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-05-gao-qi/">📣💨✨小技巧备忘录（05）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/vant-vue-ying-yong-jie-shao-01/">📣💨✨Vant Vue应用介绍01😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-04-gao-qi/">📣💨✨小技巧备忘录（04）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/bct-report-server-gao-qi-xu-02/">📣💨✨BCT Report Server搞起😎 续02</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-03-gao-qi/">📣💨✨小技巧备忘录（03）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-02-gao-qi/">📣💨✨小技巧备忘录（02）搞起😎</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://1078889045.github.io/tag/V9qa0RiAD/" class="badge ">
+          .NET Windows Installer
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/n2IHSlo3K/" class="badge secondary">
+          new Bing
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge success">
+          DM barcode
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/52TnZrq8e/" class="badge success">
+          SVN
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/c-PeQfKay/" class="badge ">
+          Telerik Doc
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge secondary">
+          BCT Vue
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge success">
+          Report Builder 3.0
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge warning">
+          BCT Report Server
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge success">
+          BarTender
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://1078889045.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+<script>
+/**************** �����Ⱦ *******************/
+
+class Circle {
+    constructor({ origin, speed, color, angle, context }) {
+        this.origin = origin
+        this.position = { ...this.origin }
+        this.color = color
+        this.speed = speed
+        this.angle = angle
+        this.context = context
+        this.renderCount = 0
+    }
+
+    draw() {
+        this.context.fillStyle = this.color
+        this.context.beginPath()
+        this.context.arc(this.position.x, this.position.y, 2, 0, Math.PI * 2)
+        this.context.fill()
+    }
+
+    move() {
+        this.position.x = (Math.sin(this.angle) * this.speed) + this.position.x
+        this.position.y = (Math.cos(this.angle) * this.speed) + this.position.y + (this.renderCount * 0.3)
+        this.renderCount++
+    }
+}
+
+class Boom {
+    constructor({ origin, context, circleCount = 10, area }) {
+        this.origin = origin
+        this.context = context
+        this.circleCount = circleCount
+        this.area = area
+        this.stop = false
+        this.circles = []
+    }
+
+    randomArray(range) {
+        const length = range.length
+        const randomIndex = Math.floor(length * Math.random())
+        return range[randomIndex]
+    }
+
+    randomColor() {
+        const range = ['8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+        return '#' + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range)
+    }
+
+    randomRange(start, end) {
+        return (end - start) * Math.random() + start
+    }
+
+    init() {
+        for (let i = 0; i < this.circleCount; i++) {
+            const circle = new Circle({
+                context: this.context,
+                origin: this.origin,
+                color: this.randomColor(),
+                angle: this.randomRange(Math.PI - 1, Math.PI + 1),
+                speed: this.randomRange(1, 6)
+            })
+            this.circles.push(circle)
+        }
+    }
+
+    move() {
+        this.circles.forEach((circle, index) => {
+            if (circle.position.x > this.area.width || circle.position.y > this.area.height) {
+                return this.circles.splice(index, 1)
+            }
+            circle.move()
+        })
+        if (this.circles.length == 0) {
+            this.stop = true
+        }
+    }
+
+    draw() {
+        this.circles.forEach(circle => circle.draw())
+    }
+}
+
+class CursorSpecialEffects {
+    constructor() {
+        this.computerCanvas = document.createElement('canvas')
+        this.renderCanvas = document.createElement('canvas')
+
+        this.computerContext = this.computerCanvas.getContext('2d')
+        this.renderContext = this.renderCanvas.getContext('2d')
+
+        this.globalWidth = window.innerWidth
+        this.globalHeight = window.innerHeight
+
+        this.booms = []
+        this.running = false
+    }
+
+    handleMouseDown(e) {
+        const boom = new Boom({
+            origin: { x: e.clientX, y: e.clientY },
+            context: this.computerContext,
+            area: {
+                width: this.globalWidth,
+                height: this.globalHeight
+            }
+        })
+        boom.init()
+        this.booms.push(boom)
+        this.running || this.run()
+    }
+
+    handlePageHide() {
+        this.booms = []
+        this.running = false
+    }
+
+    init() {
+        const style = this.renderCanvas.style
+        style.position = 'fixed'
+        style.top = style.left = 0
+        style.zIndex = '999999999999999999999999999999999999999999'
+        style.pointerEvents = 'none'
+
+        style.width = this.renderCanvas.width = this.computerCanvas.width = this.globalWidth
+        style.height = this.renderCanvas.height = this.computerCanvas.height = this.globalHeight
+
+        document.body.append(this.renderCanvas)
+
+        window.addEventListener('mousedown', this.handleMouseDown.bind(this))
+        window.addEventListener('pagehide', this.handlePageHide.bind(this))
+    }
+
+    run() {
+        this.running = true
+        if (this.booms.length == 0) {
+            return this.running = false
+        }
+
+        requestAnimationFrame(this.run.bind(this))
+
+        this.computerContext.clearRect(0, 0, this.globalWidth, this.globalHeight)
+        this.renderContext.clearRect(0, 0, this.globalWidth, this.globalHeight)
+
+        this.booms.forEach((boom, index) => {
+            if (boom.stop) {
+                return this.booms.splice(index, 1)
+            }
+            boom.move()
+            boom.draw()
+        })
+        this.renderContext.drawImage(this.computerCanvas, 0, 0, this.globalWidth, this.globalHeight)
+    }
+}
+
+const cursorSpecialEffects = new CursorSpecialEffects()
+cursorSpecialEffects.init()
+</script>
+
+<script type="application/javascript">
+new cursoreffects.emojiCursor();
+AOS.init();
+
+//hljs.initHighlightingOnLoad()
+hljs.highlightAll()
+
+let jsonPath = sessionStorage.getItem("jsonPath");
+if(!jsonPath) {
+	const modelArr = ["https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json",
+                "https://unpkg.com/live2d-widget-model-hijiki@1.0.5/assets/hijiki.model.json",
+                "https://unpkg.com/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json",
+                "https://unpkg.com/live2d-widget-model-z16@1.0.5/assets/z16.model.json",
+                "https://unpkg.com/live2d-widget-model-hibiki@1.0.5/assets/hibiki.model.json",
+                "https://unpkg.com/live2d-widget-model-ni-j@1.0.5/assets/ni-j.model.json",
+                "https://unpkg.com/live2d-widget-model-nipsilon@1.0.5/assets/nipsilon.model.json",
+                "https://unpkg.com/live2d-widget-model-nito@1.0.5/assets/nito.model.json",
+                "https://unpkg.com/live2d-widget-model-tsumiki@1.0.5/assets/tsumiki.model.json",
+                "https://unpkg.com/live2d-widget-model-unitychan@1.0.5/assets/unitychan.model.json",
+                "https://unpkg.com/live2d-widget-model-chitose@1.0.5/assets/chitose.model.json",
+                "https://unpkg.com/live2d-widget-model-haruto@1.0.5/assets/haruto.model.json",
+                "https://unpkg.com/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json",
+	"https://unpkg.com/live2d-widget-model-haru@1.0.5/01/assets/haru01.model.json",
+	"https://unpkg.com/live2d-widget-model-haru@1.0.5/02/assets/haru02.model.json"];  
+ 	jsonPath = modelArr[Math.floor(Math.random() * modelArr.length + 1) - 1];   
+	sessionStorage.setItem("jsonPath", jsonPath);
+}
+
+L2Dwidget.init({
+            "model": {
+                // �滻ģ�� 
+                // jsonPath: "https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-hijiki@1.0.5/assets/hijiki.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-z16@1.0.5/assets/z16.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-hibiki@1.0.5/assets/hibiki.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-ni-j@1.0.5/assets/ni-j.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-nipsilon@1.0.5/assets/nipsilon.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-nito@1.0.5/assets/nito.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-tsumiki@1.0.5/assets/tsumiki.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-unitychan@1.0.5/assets/unitychan.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-chitose@1.0.5/assets/chitose.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-haruto@1.0.5/assets/haruto.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json",
+	// jsonPath: "https://unpkg.com/live2d-widget-model-haru@1.0.5/01/assets/haru01.model.json",
+	// jsonPath: "https://unpkg.com/live2d-widget-model-haru@1.0.5/02/assets/haru02.model.json",   
+ 	jsonPath: jsonPath,
+                "scale": 1
+            },
+            "display": {
+ 
+                "position": "right",
+                "width": 120,
+                "height": 300,
+                "hOffset": 0,
+                "vOffset": -20
+            },
+            "mobile": {
+                "show": false,
+                "scale": 0.3
+            },
+            "react": {
+                "opacityDefault": 0.8,
+                "opacityOnHover": 0.2
+            }
+        });
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '396d5fd129bceaac6ab6',
+        clientSecret: 'a4d9facd0e22ffda39d9c5ed02453bbd4fd4b6fb',
+        repo: 'POM-Gitalk',
+        owner: '1078889045',
+        admin: ['1078889045'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

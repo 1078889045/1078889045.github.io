@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>📣💨✨BCT Report Server搞起😎 续02 | POM Notes</title>
+<meta name="description" content="活到老学到老">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://1078889045.github.io/favicon.ico?v=1682056388699">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://1078889045.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/highlight.min.js"></script>
+<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://1078889045.github.io">POM Notes</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>📣💨✨BCT Report Server搞起😎 续02</h1>
+            <p class="article-meta">
+              2021-02-19
+              
+                <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge secondary">
+                  BCT Report Server
+                </a>
+              
+            </p>
+            
+              <img src="https://1078889045.github.io/post-images/bct-report-server-gao-qi-xu-02.png" alt="📣💨✨BCT Report Server搞起😎 续02">
+            
+            <div class="post-content">
+              <!-- more -->
+<blockquote>
+<p>如何调用Web服务获取数据？</p>
+</blockquote>
+<h2 id="准备服务"><strong>准备服务</strong></h2>
+<ol>
+<li>首先用NodeJS（其它语言亦可）编写一个WebAPI测试服务（<font color=red>目前测试看上去不适用jwt认证或OAuth授权，推荐不需要验证的方式</font>）
+<ul>
+<li><code>app.js</code></li>
+</ul>
+<pre><code class="language-JavaScript">
+    const express = require('express') //引入第三方express框架
+    const app = express() //创建web服务
+    const path = require('path') //路径管理模块
+    var utilities = require('./utils/utilities.js');
+    module.exports = app;
+    //设置跨域访问
+    app.all('*', function(req, res, next) {
+        res.header(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);
+        res.header(&quot;Access-Control-Allow-Headers&quot;,
+            &quot;Content-Type, Content-Length, Authorization, Accept, X-Requested-With, ignoreCancelToken&quot;);
+        res.header(&quot;Access-Control-Allow-Methods&quot;, &quot;PUT,POST,GET,DELETE,OPTIONS&quot;);
+        if (req.method == &quot;OPTIONS&quot;) {
+            res.send(200);
+        } else {
+            next();
+        }
+    });
+    app.use(express.static(path.join(__dirname, 'public'))) //静态资源管理
+    const bodyParser = require('body-parser') //处理post接收值的第三模块
+    app.use(bodyParser.urlencoded({
+        extended: false
+    })) //接收post传值中间件
+    app.use(bodyParser.json()) //接收json传真中间件
+    //配置使用cookie的
+    const cookie = require('cookie-parser')
+    app.use(cookie())
+    //引入二级路由
+    const table = require('./routes/table');
+    //创建一级路由
+    app.use('/table', table);
+    var server = app.listen(12347, function() {
+        var host = server.address().address
+        var port = server.address().port
+        console.log(&quot;应用实例，访问地址为 http://%s:%s&quot;, &quot;localhost&quot;, port)
+    });
+
+</code></pre>
+<ul>
+<li><code>table.js</code></li>
+</ul>
+<pre><code class="language-JavaScript">   
+    var express = require('express');
+    var table = express.Router();
+    var db = require('../utils/db');
+    var utilities = require('../utils/utilities.js');
+    table.get('/getDemoList', function(req, res) {
+        const page = req.query[&quot;page&quot;];
+        const pageSize = req.query[&quot;pageSize&quot;];
+        const field = req.query[&quot;field&quot;];
+        const order = req.query[&quot;order&quot;];
+        var sb = &quot; DECLARE @DataScope nvarchar(64); &quot;;
+        sb += &quot; SET @DataScope = N'温度'; &quot;;
+        sb += &quot; EXECUTE [dbo].[CalculateTrendline] @DataScope; &quot;;
+        db.sql(sb, function(err, result) {
+            if (err) {
+                res.json(utilities.resultError({
+                    message: err
+                }));
+                return;
+            }
+            var arr = result.recordsets[0];
+            if (arr.length &gt; 0 &amp;&amp; order != null) {
+                if (order == &quot;ascend&quot;) {
+                    arr = arr.sort(function(a, b) {
+                        return a[field] &gt; b[field] ? 1 : -1;
+                    });
+                } else if (order == &quot;descend&quot;) {
+                    arr = arr.sort(function(a, b) {
+                        return a[field] &lt; b[field] ? 1 : -1;
+                    });
+                }
+            }
+            if (page != null) {
+                res.json(utilities.resultPageSuccess(page, pageSize, arr));            
+            } else {
+                res.json(utilities.resultSuccess({
+                    items: arr,
+                    total: arr.length
+                }));
+            }
+        });
+    });
+</code></pre>
+</li>
+</ol>
+<h2 id="如何设计"><strong>如何设计</strong></h2>
+<ol>
+<li>在设计报表时，添加<code>Web Service Data Source</code>，根据接口情况进行配置，然后拉取Table进行展示<br>
+<img src="https://1078889045.github.io/post-images/1613613353260.png" alt="" loading="lazy"></li>
+</ol>
+<h2 id="如何使用"><strong>如何使用</strong></h2>
+<ol>
+<li>为<code>BCTWebReportServer</code>工程新增引用<code>Telerik.Reporting.WebServiceDataSource</code>，然后进行发布</li>
+<li>将设计的报表拖入Reports文件夹即可</li>
+</ol>
+<h1 id="font-size3-̇-̇font"><font size=3>✧⁺⸜(●˙▾˙●)⸝⁺✧</font></h1>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-03-gao-qi/">
+                <h3 class="post-title">
+                  📣💨✨小技巧备忘录（03）搞起😎
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
+
+          
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://1078889045.github.io/images/avatar.png?v=1682056388699" class="no-responsive avatar">
+    <div class="text-muted">活到老学到老</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-09-gao-qi/">📣💨✨小技巧备忘录（09）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-08-gao-qi/">📣💨✨小技巧备忘录（08）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-07-gao-qi/">📣💨✨小技巧备忘录（07）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-06-gao-qi/">📣💨✨小技巧备忘录（06）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-05-gao-qi/">📣💨✨小技巧备忘录（05）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/vant-vue-ying-yong-jie-shao-01/">📣💨✨Vant Vue应用介绍01😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-04-gao-qi/">📣💨✨小技巧备忘录（04）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/bct-report-server-gao-qi-xu-02/">📣💨✨BCT Report Server搞起😎 续02</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-03-gao-qi/">📣💨✨小技巧备忘录（03）搞起😎</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://1078889045.github.io/post/xiao-ji-qiao-bei-wang-lu-02-gao-qi/">📣💨✨小技巧备忘录（02）搞起😎</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://1078889045.github.io/tag/V9qa0RiAD/" class="badge success">
+          .NET Windows Installer
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/n2IHSlo3K/" class="badge secondary">
+          new Bing
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/zm_NZiKfb/" class="badge success">
+          DM barcode
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/52TnZrq8e/" class="badge success">
+          SVN
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/c-PeQfKay/" class="badge ">
+          Telerik Doc
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/f3073v4dG/" class="badge success">
+          BCT Vue
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/jZzqESzq-/" class="badge success">
+          Report Builder 3.0
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/Y70K12de-/" class="badge secondary">
+          BCT Report Server
+        </a>
+      
+        <a href="https://1078889045.github.io/tag/ViZdbaylr/" class="badge secondary">
+          BarTender
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://1078889045.github.io/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+<script>
+/**************** �����Ⱦ *******************/
+
+class Circle {
+    constructor({ origin, speed, color, angle, context }) {
+        this.origin = origin
+        this.position = { ...this.origin }
+        this.color = color
+        this.speed = speed
+        this.angle = angle
+        this.context = context
+        this.renderCount = 0
+    }
+
+    draw() {
+        this.context.fillStyle = this.color
+        this.context.beginPath()
+        this.context.arc(this.position.x, this.position.y, 2, 0, Math.PI * 2)
+        this.context.fill()
+    }
+
+    move() {
+        this.position.x = (Math.sin(this.angle) * this.speed) + this.position.x
+        this.position.y = (Math.cos(this.angle) * this.speed) + this.position.y + (this.renderCount * 0.3)
+        this.renderCount++
+    }
+}
+
+class Boom {
+    constructor({ origin, context, circleCount = 10, area }) {
+        this.origin = origin
+        this.context = context
+        this.circleCount = circleCount
+        this.area = area
+        this.stop = false
+        this.circles = []
+    }
+
+    randomArray(range) {
+        const length = range.length
+        const randomIndex = Math.floor(length * Math.random())
+        return range[randomIndex]
+    }
+
+    randomColor() {
+        const range = ['8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+        return '#' + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range)
+    }
+
+    randomRange(start, end) {
+        return (end - start) * Math.random() + start
+    }
+
+    init() {
+        for (let i = 0; i < this.circleCount; i++) {
+            const circle = new Circle({
+                context: this.context,
+                origin: this.origin,
+                color: this.randomColor(),
+                angle: this.randomRange(Math.PI - 1, Math.PI + 1),
+                speed: this.randomRange(1, 6)
+            })
+            this.circles.push(circle)
+        }
+    }
+
+    move() {
+        this.circles.forEach((circle, index) => {
+            if (circle.position.x > this.area.width || circle.position.y > this.area.height) {
+                return this.circles.splice(index, 1)
+            }
+            circle.move()
+        })
+        if (this.circles.length == 0) {
+            this.stop = true
+        }
+    }
+
+    draw() {
+        this.circles.forEach(circle => circle.draw())
+    }
+}
+
+class CursorSpecialEffects {
+    constructor() {
+        this.computerCanvas = document.createElement('canvas')
+        this.renderCanvas = document.createElement('canvas')
+
+        this.computerContext = this.computerCanvas.getContext('2d')
+        this.renderContext = this.renderCanvas.getContext('2d')
+
+        this.globalWidth = window.innerWidth
+        this.globalHeight = window.innerHeight
+
+        this.booms = []
+        this.running = false
+    }
+
+    handleMouseDown(e) {
+        const boom = new Boom({
+            origin: { x: e.clientX, y: e.clientY },
+            context: this.computerContext,
+            area: {
+                width: this.globalWidth,
+                height: this.globalHeight
+            }
+        })
+        boom.init()
+        this.booms.push(boom)
+        this.running || this.run()
+    }
+
+    handlePageHide() {
+        this.booms = []
+        this.running = false
+    }
+
+    init() {
+        const style = this.renderCanvas.style
+        style.position = 'fixed'
+        style.top = style.left = 0
+        style.zIndex = '999999999999999999999999999999999999999999'
+        style.pointerEvents = 'none'
+
+        style.width = this.renderCanvas.width = this.computerCanvas.width = this.globalWidth
+        style.height = this.renderCanvas.height = this.computerCanvas.height = this.globalHeight
+
+        document.body.append(this.renderCanvas)
+
+        window.addEventListener('mousedown', this.handleMouseDown.bind(this))
+        window.addEventListener('pagehide', this.handlePageHide.bind(this))
+    }
+
+    run() {
+        this.running = true
+        if (this.booms.length == 0) {
+            return this.running = false
+        }
+
+        requestAnimationFrame(this.run.bind(this))
+
+        this.computerContext.clearRect(0, 0, this.globalWidth, this.globalHeight)
+        this.renderContext.clearRect(0, 0, this.globalWidth, this.globalHeight)
+
+        this.booms.forEach((boom, index) => {
+            if (boom.stop) {
+                return this.booms.splice(index, 1)
+            }
+            boom.move()
+            boom.draw()
+        })
+        this.renderContext.drawImage(this.computerCanvas, 0, 0, this.globalWidth, this.globalHeight)
+    }
+}
+
+const cursorSpecialEffects = new CursorSpecialEffects()
+cursorSpecialEffects.init()
+</script>
+
+<script type="application/javascript">
+new cursoreffects.emojiCursor();
+AOS.init();
+
+//hljs.initHighlightingOnLoad()
+hljs.highlightAll()
+
+let jsonPath = sessionStorage.getItem("jsonPath");
+if(!jsonPath) {
+	const modelArr = ["https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json",
+                "https://unpkg.com/live2d-widget-model-hijiki@1.0.5/assets/hijiki.model.json",
+                "https://unpkg.com/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json",
+                "https://unpkg.com/live2d-widget-model-z16@1.0.5/assets/z16.model.json",
+                "https://unpkg.com/live2d-widget-model-hibiki@1.0.5/assets/hibiki.model.json",
+                "https://unpkg.com/live2d-widget-model-ni-j@1.0.5/assets/ni-j.model.json",
+                "https://unpkg.com/live2d-widget-model-nipsilon@1.0.5/assets/nipsilon.model.json",
+                "https://unpkg.com/live2d-widget-model-nito@1.0.5/assets/nito.model.json",
+                "https://unpkg.com/live2d-widget-model-tsumiki@1.0.5/assets/tsumiki.model.json",
+                "https://unpkg.com/live2d-widget-model-unitychan@1.0.5/assets/unitychan.model.json",
+                "https://unpkg.com/live2d-widget-model-chitose@1.0.5/assets/chitose.model.json",
+                "https://unpkg.com/live2d-widget-model-haruto@1.0.5/assets/haruto.model.json",
+                "https://unpkg.com/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json",
+	"https://unpkg.com/live2d-widget-model-haru@1.0.5/01/assets/haru01.model.json",
+	"https://unpkg.com/live2d-widget-model-haru@1.0.5/02/assets/haru02.model.json"];  
+ 	jsonPath = modelArr[Math.floor(Math.random() * modelArr.length + 1) - 1];   
+	sessionStorage.setItem("jsonPath", jsonPath);
+}
+
+L2Dwidget.init({
+            "model": {
+                // �滻ģ�� 
+                // jsonPath: "https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-hijiki@1.0.5/assets/hijiki.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-z16@1.0.5/assets/z16.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-hibiki@1.0.5/assets/hibiki.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-ni-j@1.0.5/assets/ni-j.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-nipsilon@1.0.5/assets/nipsilon.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-nito@1.0.5/assets/nito.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-tsumiki@1.0.5/assets/tsumiki.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-unitychan@1.0.5/assets/unitychan.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-chitose@1.0.5/assets/chitose.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-haruto@1.0.5/assets/haruto.model.json",
+                // jsonPath: "https://unpkg.com/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json",
+	// jsonPath: "https://unpkg.com/live2d-widget-model-haru@1.0.5/01/assets/haru01.model.json",
+	// jsonPath: "https://unpkg.com/live2d-widget-model-haru@1.0.5/02/assets/haru02.model.json",   
+ 	jsonPath: jsonPath,
+                "scale": 1
+            },
+            "display": {
+ 
+                "position": "right",
+                "width": 120,
+                "height": 300,
+                "hOffset": 0,
+                "vOffset": -20
+            },
+            "mobile": {
+                "show": false,
+                "scale": 0.3
+            },
+            "react": {
+                "opacityDefault": 0.8,
+                "opacityOnHover": 0.2
+            }
+        });
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '396d5fd129bceaac6ab6',
+        clientSecret: 'a4d9facd0e22ffda39d9c5ed02453bbd4fd4b6fb',
+        repo: 'POM-Gitalk',
+        owner: '1078889045',
+        admin: ['1078889045'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
