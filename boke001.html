@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百度网盘画作扫描功能解析</title>
+    <script src="https://cdn.tailwindcss.com/3.3.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.7;
+        }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(31, 38, 135, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glassmorphism:hover {
+            box-shadow: 0 15px 45px rgba(31, 38, 135, 0.15);
+            transform: translateY(-3px);
+        }
+        .speaker-a {
+            color: #3b82f6;
+            font-weight: 600;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            background-color: rgba(59, 130, 246, 0.1);
+            transition: all 0.3s ease;
+        }
+        .speaker-b {
+            color: #10b981;
+            font-weight: 600;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            background-color: rgba(16, 185, 129, 0.1);
+            transition: all 0.3s ease;
+        }
+        .speaker-a:hover, .speaker-b:hover {
+            transform: translateX(3px);
+        }
+        .transcript-container {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 16px;
+        }
+        .transcript-container p {
+            margin-bottom: 1.5rem;
+            padding: 0.8rem 0;
+            line-height: 1.8;
+        }
+        .waveform {
+            height: 160px;
+            width: 100%;
+            aspect-ratio: 21/9;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .waveform:hover {
+            transform: scale(1.01);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">百度网盘画作扫描功能解析</h1>
+            <p class="text-gray-600">探索如何高效保存和展示艺术作品</p>
+        </div>
+
+        <div class="glassmorphism p-6 mb-8">
+            <div class="waveform mb-4" style="background-image: url('https://s.coze.cn/image/UJsyxP1rpos/')"></div>
+            
+            <div class="flex items-center justify-between mb-4">
+                <audio id="podcast-audio" controls class="w-full">
+                    <source src="https://lf-bot-studio-plugin-resource.coze.cn/obj/bot-studio-platform-plugin-tos/sami_podcast/tts/fdc3761b35cb4bc7911686b0fecda4f2.mp3" type="audio/mpeg">
+                    您的浏览器不支持音频播放
+                </audio>
+            </div>
+            <p class="text-sm text-gray-500 mt-2">*若商用，需要声明由扣子空间生成</p>
+        </div>
+         
+        <div class="glassmorphism p-6">
+            <h2 class="text-xl font-semibold mb-4 flex items-center">
+                <i class="fas fa-closed-captioning mr-2 text-blue-500"></i>播客字幕
+            </h2>
+            
+            <div class="transcript-container p-4 bg-gray-50 rounded-lg" id="transcript">
+                <p class="mb-3"><span class="speaker-a">女生:</span> 哈喽大家好欢迎收听，我们的播客。然后今天呢我们要聊一个百度网盘的新功能啊这个叫做画作扫描。对，听起来就很有意思对不对，对。我们就来看看这个东西到底有什么用，怎么用，有哪些比较有趣的。实际的使用场景。</p>
+                
+                <p class="mb-3"><span class="speaker-b">男生:</span> 嗯，感觉很有意思那我们就直接开始吧，直接开搞，看看它到底好在哪里。</p>
+                
+                <p class="mb-3"><span class="speaker-a">女生:</span> 那我们先来聊聊这个百度网盘这个新出的这个画作扫描啊，他到底是个什么东西，然后他的操作起来复不复杂？</p>
+                
+                <p class="mb-3"><span class="speaker-b">男生:</span> 就他其实就是一个很好用的工具，就是你如果是喜欢画画的或者说家里面有小朋友喜欢画画的。你就可以用这个百度网盘的这个画作扫描，它可以帮你很清晰的把这个画作。扫描下来然后它有一些智能优化的功能就会让你的这个笔触啊包括一些纹理。都保存的非常完好，你操作也非常简单就可以直接生成一个文档，OK.就特别方便你去整理你这些作品。</p>
+                
+                <p class="mb-3"><span class="speaker-a">女生:</span> 听起来确实很实用啊，那这个百度网盘的这个画作扫描到底具体都有哪些功能，然后又可以给家长们带来哪些便利呢？</p>
+                
+                <p class="mb-3"><span class="speaker-b">男生:</span> 就是你打开百度网盘的这个 APP 之后，它有一个扫描的这个图标你点进去之后。有一个画作扫描，然后你就可以直接拍你的这个画作，它可以连续拍。自动生成一个文档，它还可以。自动帮你优化光线啊，去除阴影啊，校正角度啊。它还可以把你这个笔触啊纹理啊都拍的特别清晰，就效果就是可以跟专业的扫描仪媲美。</p>
+                
+                <p class="mb-3"><span class="speaker-a">女生:</span> 哇这听起来就很强大呀！</p>
+                
+                <p class="mb-3"><span class="speaker-b">男生:</span> 对而且它还有一些很有意思的，AI 的功能比如说它有画框，各种风格的画框你可以给你的这个画作加一个画框。然后还有就是如果你上传的是一个线稿的话它可以给你自动上色。就特别适合小朋友家长还可以把这些画。做成一个电子画廊就是成长记录那种，还可以生成一个链接就是在线的画展。你可以分享给亲朋好友他们可以直接在线参观，就还挺有仪式感的。</p>
+                
+                <p class="mb-3"><span class="speaker-a">女生:</span> 那这个百度网盘的这个画作扫描功能，相比我们普通的用手机拍照。有哪些突出的优势呢？</p>
+                
+                <p class="mb-3"><span class="speaker-b">男生:</span> 就是手机拍照的话你很容易有光影的问题然后角度不对的话也会有变形。但是这个功能它就会自动帮你优化。它是可以达到一个专业的扫描的效果，色彩还原度也特别高，就它会让你的这个画作更好看，更。真实，对。</p>
+                
+                <p class="mb-3"><span class="speaker-a">女生:</span> 听起来确实很实用啊那你觉得这个东西在日常生活当中还有哪些，比较创意的用途呢？</p>
+                
+                <p class="mb-3"><span class="speaker-b">男生:</span> 嗯比如说你可以把它做成电子贺卡。然后送给你的亲朋好友，或者说你可以把它打印出来装饰你的房间。或者说你可以用它来制作一些。个性化的文创产品，就都是可以的，对。</p>
+                
+                <p class="mb-3"><span class="speaker-a">女生:</span> 那你觉得，总结一下就是百度网盘这个画作扫描功能到底值不值得大家去试一试？</p>
+                
+                <p class="mb-3"><span class="speaker-b">男生:</span> 我觉得这个功能就是真的还蛮实用的就是它既解决了。保存画作的这个，清晰和整理的问题然后又有一些趣味性比如说这个 AI 的画框啊这个。自动上色呀，包括这个电子画廊和在线画展这个功能真的还蛮让人惊喜的，所以我觉得。无论是家里面有喜欢画画的小朋友的。还是说，呃绘画爱好者，我觉得都可以去尝试一下这个功能。</p>
+                
+                <p class="mb-3"><span class="speaker-a">女生:</span> 行吧反正就是今天我们给大家聊了百度网盘这个新上线的这个画作扫描功能。它确实给我们提供了一种，既高效又有趣的方式来保存和展示我们的这些艺术作品。所以说无论是小朋友的这种成长记录也好还是说。艺术家的这种创作也好我觉得都是非常值得一试的。</p>
+                
+                <p class="mb-3"><span class="speaker-b">男生:</span> OK 了那么以上就是这期播客的全部内容啦然后。感谢大家的收听咱们下期再见吧，拜拜拜拜！</p>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center text-gray-500 text-sm">
+            <p>页面内容均由 AI 生成，仅供参考</p>
+            <p>created by <a href="https://space.coze.cn" class="text-blue-500 hover:underline">coze space</a></p>
+        </div>
+    </div>
